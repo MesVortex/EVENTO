@@ -46,4 +46,16 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function admins(){
+        return $this->hasOne(Admin::class, 'userID');
+    }
+
+    public function organizers(){
+        return $this->hasMany(Organizer::class, 'userID');
+    }
+
+    public function clients(){
+        return $this->hasMany(Client::class, 'userID');
+    }
 }

@@ -38,10 +38,14 @@ class RegisteredUserController extends Controller
             'role' => 'client',
         ]);
 
+        $user->clients()->create([
+            'userID' => $user->id
+        ]);
+
         event(new Registered($user));
 
         Auth::login($user);
-        
+
         return redirect('/client/landingPage');
 
         // return redirect(RouteServiceProvider::HOME);
