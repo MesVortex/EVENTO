@@ -2,17 +2,37 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Laravel\Socialite\Facades\Socialite;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 
 class ProviderController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+
+    public function redirect($provider)
     {
-        //
+        return Socialite::driver($provider)->redirect();
+    }
+
+    public function callback($provider)
+    {
+        $socialUser = Socialite::driver($provider)->user();
+
+        $user = User::updateOrCreate([
+            'provider_id' => $socialUser->id,
+            'provider' => $provider,
+        ], [
+            'name' => $socialUser->name,
+            'email' => $socialUser->email,
+            'provider_token' => $socialUser->token,
+
+        ]);
+
+        Auth::login($user);
+        return redirect('/dashboard');
+        // return redirect('/client/home');
     }
 
     /**
