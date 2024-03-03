@@ -19,6 +19,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/client/landingPage', function () {
+    if (auth()->user()->role === 'client') {
+        return view('client.landingPage');
+    }
+})->name('client.home');
+
 Route::get('/auth/{provider}/redirect', [ProviderController::class, 'redirect']);
 Route::get('/auth/{provider}/callback', [ProviderController::class, 'callback']);
 
