@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Admin;
 use App\Models\Category;
-use App\Models\User;
+use App\Models\Client;
+use App\Models\Organizer;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -20,8 +21,9 @@ class AdminController extends Controller
 
     public function usersDash()
     {
-        $users = User::all();
-        return view('admin.usersDashboard', compact('users'));
+        $clients = Client::all();
+        $organizers = Organizer::all();
+        return view('admin.usersDashboard', compact('organizers', 'clients'));
     }
 
     /**

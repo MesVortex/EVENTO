@@ -38,9 +38,12 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 
     Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.index');
     Route::get('/admin/dashboard/users', [AdminController::class, 'usersDash'])->name('admin.users');
+    Route::resource('/admin/dashboard/category', CategoryController::class);
+    Route::patch('/admin/dashboard/{client}/ban', [ClientController::class, 'ban'])->name('client.ban');
 });
 
-Route::resource('/admin/dashboard/category', CategoryController::class);
+
+
 
 
 Route::get('/auth/{provider}/redirect', [ProviderController::class, 'redirect']);

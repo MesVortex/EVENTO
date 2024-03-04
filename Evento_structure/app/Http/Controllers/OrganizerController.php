@@ -62,4 +62,17 @@ class OrganizerController extends Controller
     {
         //
     }
+
+    public function ban(Organizer $organizer)
+    {
+        if (!$organizer->isBanned) {
+            $organizer->update([
+                'isBanned' => 1,
+            ]);
+        } else {
+            $organizer->update([
+                'isBanned' => 0,
+            ]);
+        }
+    }
 }
