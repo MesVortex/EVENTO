@@ -62,4 +62,17 @@ class ClientController extends Controller
     {
         //
     }
+
+    public function ban(Client $client)
+    {
+        if (!$client->isBanned) {
+            $client->update([
+                'isBanned' => 1,
+            ]);
+        }else{
+            $client->update([
+                'isBanned' => 0,
+            ]);
+        }
+    }
 }

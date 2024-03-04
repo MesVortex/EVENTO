@@ -31,9 +31,9 @@ class AuthenticatedSessionController extends Controller
 
         $user = Auth::user(); 
         if ($user->role == 'admin') {
-            return redirect('/dashboard');
+            return redirect('/admin/dashboard');
         } elseif ($user->role == 'organizer') {
-            return redirect('/patient/index');
+            return redirect('/organizer/dashboard');
         } else {
             return redirect('/client/landingPage');
         }
