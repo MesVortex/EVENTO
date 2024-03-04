@@ -20,6 +20,13 @@
                                 <x-input-error :messages="$errors->get('email')" class="mt-2" />
                             </div>
                             <div class="mb-6">
+                                <select id="role" name="role" :value="old('role')" class=" w-full rounded-md border border-[#E9EDF4] py-3 px-5 bg-[#FCFDFE] text-base text-body-color placeholder-[#ACB6BE] outline-none focus-visible:shadow-none focus:border-primary " required>Select Your Role
+                                    <option value="client" selected>Client</option>
+                                    <option value="organizer">Organizer</option>
+                                </select>
+                                <x-input-error :messages="$errors->get('role')" class="mt-2" />
+                            </div>
+                            <div class="mb-6">
                                 <input id="password" type="password" name="password" placeholder="Password" class=" w-full rounded-md border border-[#E9EDF4] py-3 px-5 bg-[#FCFDFE] text-base text-body-color placeholder-[#ACB6BE] outline-none focus-visible:shadow-none focus:border-primary " required autocomplete="new-password" />
                                 <x-input-error :messages="$errors->get('password')" class="mt-2" />
                             </div>

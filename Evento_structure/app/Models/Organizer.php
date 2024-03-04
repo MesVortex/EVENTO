@@ -11,6 +11,7 @@ class Organizer extends Model
 
     protected $fillable = [
         'userID',
+        'isBanned',
     ];
 
     public function users(){

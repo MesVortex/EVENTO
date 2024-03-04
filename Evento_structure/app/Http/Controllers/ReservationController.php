@@ -2,17 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Client;
+use App\Models\Reservation;
 use Illuminate\Http\Request;
 
-class ClientController extends Controller
+class ReservationController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view('client.landingPage');
+        //
     }
 
     /**
@@ -34,7 +34,7 @@ class ClientController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Client $client)
+    public function show(Reservation $reservation)
     {
         //
     }
@@ -42,7 +42,7 @@ class ClientController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Client $client)
+    public function edit(Reservation $reservation)
     {
         //
     }
@@ -50,7 +50,7 @@ class ClientController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Client $client)
+    public function update(Request $request, Reservation $reservation)
     {
         //
     }
@@ -58,7 +58,7 @@ class ClientController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Client $client)
+    public function destroy(Reservation $reservation)
     {
         //
     }

@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\Auth\ProviderController;
+use App\Http\Controllers\ClientController;
+use App\Http\Controllers\OrganizerController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -19,11 +21,18 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/client/landingPage', function () {
-    if (auth()->user()->role === 'client') {
-        return view('client.landingPage');
-    }
-})->name('client.home');
+Route::middleware(['auth', 'role:client'])->group( function(){
+
+    Route::get('/client/landingPage', [ClientController::class, 'index'])->name('client.index');
+    
+});
+
+Route::middleware(['auth', 'role:organizer'])->group( function(){
+
+    Route::get('/organizer/dashboard', [OrganizerController::class, 'index'])->name('organizer.index');
+    
+});
+
 
 Route::get('/auth/{provider}/redirect', [ProviderController::class, 'redirect']);
 Route::get('/auth/{provider}/callback', [ProviderController::class, 'callback']);
