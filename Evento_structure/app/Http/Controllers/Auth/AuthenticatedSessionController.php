@@ -29,21 +29,23 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        $user = Auth::user(); 
+        $user = Auth::user();
         if ($user->role == 'admin') {
             return redirect('/admin/dashboard');
         } elseif ($user->role == 'organizer') {
-            if(!$user->organizers->isBanned){
+            if (!$user->organizers->isBanned) {
                 return redirect('/organizer/dashboard');
-            }else{
+            } else {
+                Auth::logout();
                 abort('401', 'Your account is banned');
             }
         } else {
-            if(!$user->clients->isBanned){
+            if (!$user->clients->isBanned) {
                 return redirect('/client/landingPage');
-            }else{
+            } else {
+                Auth::logout();
                 abort('401', 'Your account is banned');
-            }   
+            }
         }
 
         // return redirect()->intended(RouteServiceProvider::HOME);

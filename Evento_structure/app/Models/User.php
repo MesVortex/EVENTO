@@ -52,10 +52,10 @@ class User extends Authenticatable
     }
 
     public function organizers(){
-        return $this->hasMany(Organizer::class, 'userID');
+        return $this->hasOne(Organizer::class, 'userID');
     }
 
     public function clients(){
-        return $this->hasMany(Client::class, 'userID');
+        return $this->hasOne(Client::class, 'userID');
     }
 }
