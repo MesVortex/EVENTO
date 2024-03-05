@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Auth\ProviderController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\EventController;
 use App\Http\Controllers\OrganizerController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -31,6 +32,7 @@ Route::middleware(['auth', 'role:client'])->group(function () {
 Route::middleware(['auth', 'role:organizer'])->group(function () {
 
     Route::get('/organizer/dashboard', [OrganizerController::class, 'index'])->name('organizer.index');
+    Route::resource('/organizer/dashboard/event', EventController::class);
 });
 
 Route::middleware(['auth', 'role:admin'])->group(function () {

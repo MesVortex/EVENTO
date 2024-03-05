@@ -149,7 +149,7 @@
 
           <ul class="flex items-center flex-shrink-0 space-x-6">
             <!-- Profile menu -->
-            <li class="relative">
+            <li class="">
               <button class="p-2 bg-white text-red-600 align-middle rounded-full hover:text-white hover:bg-red-600 focus:outline-none " @click="toggleProfileMenu" @keydown.escape="closeProfileMenu" aria-label="Account" aria-haspopup="true">
                 <div class="flex items-center">
                   <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -169,12 +169,15 @@
                     </a>
                   </li>
                   <li class="flex">
-                    <a class="text-white inline-flex items-center w-full px-2 py-1 text-sm font-semibold transition-colors duration-150 rounded-md hover:bg-gray-100 hover:text-gray-800" href="#">
-                      <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
-                      </svg>
-                      <span>Log out</span>
-                    </a>
+                    <form method="POST" action="{{ route('logout') }}" class="text-white inline-flex items-center w-full px-2 py-1 text-sm font-semibold transition-colors duration-150 rounded-md hover:bg-gray-100 hover:text-gray-800">
+                      @csrf
+                      <button type="submit">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                        </svg>
+                        <span>Log out</span>
+                      </button>
+                    </form>
                   </li>
                 </ul>
               </template>
@@ -261,7 +264,7 @@
                                                   <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
                                                 </svg>
                                                 <span class="sr-only">Close modal</span>
-                                              </button>                                             
+                                              </button>
                                               <form class="p-4 md:p-5 text-center" method="post" action="{{ route('client.ban', ['client' => $client->id]) }}">
                                                 @csrf
                                                 @method('PATCH')
@@ -364,7 +367,7 @@
                                                   <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
                                                 </svg>
                                                 <span class="sr-only">Close modal</span>
-                                              </button>                                             
+                                              </button>
                                               <form class="p-4 md:p-5 text-center" method="post" action="{{ route('organizer.ban', ['organizer' => $organizer->id]) }}">
                                                 @csrf
                                                 @method('PUT')

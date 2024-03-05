@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Event;
 use App\Models\Organizer;
 use Illuminate\Http\Request;
 
@@ -12,7 +13,8 @@ class OrganizerController extends Controller
      */
     public function index()
     {
-        return view('organizer.dashboard');
+        $events =Event::all();
+        return view('organizer.dashboard', compact('events'));
     }
 
     /**

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\EventRequest;
+use App\Models\Category;
 use App\Models\Event;
 use Illuminate\Http\Request;
 
@@ -20,15 +22,27 @@ class EventController extends Controller
      */
     public function create()
     {
-        //
+        $categories = Category::all();
+        return view('organizer.eventAddForm', compact('categories'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(EventRequest $request)
     {
-        //
+        Event::create([
+            'title' => $request->title,
+            'venue' => $request->venue,
+            'availablePlaces' => $request->availablePlaces,
+            'description' => $request->description,
+            'date' => $request->date,
+            'validationType' => $request->validationType,
+            'categoryID' => $request->category,
+            'organizerID' => $request->organizerID,
+        ]);
+
+        return redirect()->back()->with('success', 'Event Added!');
     }
 
     /**
@@ -44,7 +58,8 @@ class EventController extends Controller
      */
     public function edit(Event $event)
     {
-        //
+        $categories = Category::all();
+        return view('organizer.eventEditForm', compact('event', 'categories'));
     }
 
     /**
@@ -52,7 +67,18 @@ class EventController extends Controller
      */
     public function update(Request $request, Event $event)
     {
-        //
+        $event->update([
+            'title' => $request->title,
+            'venue' => $request->venue,
+            'availablePlaces' => $request->availablePlaces,
+            'description' => $request->description,
+            'date' => $request->date,
+            'validationType' => $request->validationType,
+            'categoryID' => $request->category,
+            'organizerID' => $request->organizerID,
+        ]);
+
+        return redirect()->back()->with('success', 'Event Updated!');
     }
 
     /**
@@ -60,6 +86,7 @@ class EventController extends Controller
      */
     public function destroy(Event $event)
     {
-        //
+        $event->delete();
+        return redirect()->back()->with('success', 'Event Deleted!');
     }
 }
