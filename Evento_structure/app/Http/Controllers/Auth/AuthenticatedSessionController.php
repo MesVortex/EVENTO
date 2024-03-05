@@ -33,9 +33,17 @@ class AuthenticatedSessionController extends Controller
         if ($user->role == 'admin') {
             return redirect('/admin/dashboard');
         } elseif ($user->role == 'organizer') {
-            return redirect('/organizer/dashboard');
+            if(!$user->organizers->isBanned){
+                return redirect('/organizer/dashboard');
+            }else{
+                abort('401', 'Your account is banned');
+            }
         } else {
-            return redirect('/client/landingPage');
+            if(!$user->clients->isBanned){
+                return redirect('/client/landingPage');
+            }else{
+                abort('401', 'Your account is banned');
+            }   
         }
 
         // return redirect()->intended(RouteServiceProvider::HOME);

@@ -226,7 +226,7 @@
                                   @foreach($clients as $client)
                                   <tr>
                                     <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5">
-                                      <p>{{$client->userID}}</p>
+                                      <p>{{$client->id}}</p>
                                     </td>
                                     <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5">
                                       <p>{{$client->users->name}}</p>
@@ -261,8 +261,8 @@
                                                   <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
                                                 </svg>
                                                 <span class="sr-only">Close modal</span>
-                                              </button>
-                                              <form class="p-4 md:p-5 text-center" method="post" action="{{ route('client.ban', ['client' => $client->userID]) }}">
+                                              </button>                                             
+                                              <form class="p-4 md:p-5 text-center" method="post" action="{{ route('client.ban', ['client' => $client->id]) }}">
                                                 @csrf
                                                 @method('PATCH')
                                                 <svg class="mx-auto mb-4 text-gray-400 w-12 h-12 dark:text-gray-200" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
