@@ -6,7 +6,6 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\OrganizerController;
 use App\Http\Controllers\ProfileController;
-use App\Models\Category;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -40,10 +39,8 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/admin/dashboard/users', [AdminController::class, 'usersDash'])->name('admin.users');
     Route::resource('/admin/dashboard/category', CategoryController::class);
     Route::patch('/admin/dashboard/{client}/ban', [ClientController::class, 'ban'])->name('client.ban');
+    Route::put('/admin/dashboard/{organizer}/ban', [OrganizerController::class, 'ban'])->name('organizer.ban');
 });
-
-
-
 
 
 Route::get('/auth/{provider}/redirect', [ProviderController::class, 'redirect']);

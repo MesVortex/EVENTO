@@ -66,14 +66,16 @@ class ClientController extends Controller
     public function ban(Client $client)
     {
         if (!$client->isBanned) {
-            $client->where('userID', $client->userID)->update([
+            $client->update([
                 'isBanned' => 1,
             ]);
+            return redirect()->back()->with('success', 'user Banned!');
         } else {
-            $client->where('userID', $client->userID)->update([
+            $client->update([
                 'isBanned' => 0,
             ]);
+            return redirect()->back()->with('success', 'user Unbanned!');
         }
-        return redirect()->back()->with('success', 'user Banned!');
+        
     }
 }

@@ -69,10 +69,12 @@ class OrganizerController extends Controller
             $organizer->update([
                 'isBanned' => 1,
             ]);
+            return redirect()->back()->with('success', 'user Banned!');
         } else {
             $organizer->update([
                 'isBanned' => 0,
             ]);
+            return redirect()->back()->with('success', 'user Unbanned!');
         }
     }
 }
