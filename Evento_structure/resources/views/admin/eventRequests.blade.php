@@ -200,43 +200,7 @@
                 <div class="grid gap-2 grid-cols-1 lg:grid-cols-1">
                   <div class="bg-white p-4 shadow-lg rounded-lg">
                     <div class="flex justify-between">
-                      <h1 class="font-bold text-base">Categories</h1>
-                      <button data-modal-target="authentication-modal" data-modal-toggle="authentication-modal" class="" type="button">
-                        <i class="fa-solid fa-circle-plus fa-lg text-red-600 hover:text-green-600 transition-all ease-in"></i>
-                      </button>
-
-                      <!-- Main modal -->
-                      <div id="authentication-modal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
-                        <div class="relative p-4 w-full max-w-md max-h-full">
-                          <!-- Modal content -->
-                          <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-                            <!-- Modal header -->
-                            <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
-                              <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
-                                Add Category
-                              </h3>
-                              <button type="button" class="end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="authentication-modal">
-                                <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-                                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
-                                </svg>
-                                <span class="sr-only">Close modal</span>
-                              </button>
-                            </div>
-                            <!-- Modal body -->
-                            <div class="p-4 md:p-5">
-                              <form class="space-y-4" action="{{ route('category.store') }}" method="post">
-                                @csrf
-                                @method('post')
-                                <div>
-                                  <label for="CategoryName" class="block mb-2 text-sm font-medium text-gray-900 ">Category Name</label>
-                                  <input type="text" name="CategoryName" id="CategoryName" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="exp: Aspirin" required>
-                                </div>                                
-                                <button type="submit" class="w-full text-white bg-blue-500 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center ">Add</button>
-                              </form>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
+                      <h1 class="font-bold text-base">Events Requests</h1>
                     </div>
                     <div class="mt-4">
                       <div class="flex flex-col">
@@ -253,9 +217,14 @@
                                     </th>
                                     <th class="px-6 py-3 bg-gray-50 text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
                                       <div class="flex cursor-pointer">
-                                        <span class="mr-2">Category Name</span>
+                                        <span class="mr-2">Event Title</span>
                                       </div>
-                                    </th>                            
+                                    </th>
+                                    <th class="px-6 py-3 bg-gray-50 text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                                      <div class="flex cursor-pointer">
+                                        <span class="mr-2">Event Organizer</span>
+                                      </div>
+                                    </th>
                                     <th class="px-6 py-3 bg-gray-50 text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
                                       <div class="flex cursor-pointer">
                                         <span class="mr-2">Action</span>
@@ -264,81 +233,63 @@
                                   </tr>
                                 </thead>
                                 <tbody class="bg-white divide-y divide-gray-200">
-                                  @foreach($categories as $category)
+                                  @foreach($events as $event)
                                   <tr>
                                     <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5">
-                                      <p>{{$category->id}}</p>
+                                      <p>{{$event->id}}</p>
                                     </td>
                                     <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5">
-                                      <p>{{$category->name}}</p>
-                                    </td>                                   
+                                      <p>{{$event->title}}</p>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5">
+                                      <p>{{$event->organizers->name}}</p>
+                                    </td>
                                     <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5">
                                       <div class="flex space-x-4">
-                                        <a data-modal-target="authentication-modal-{{ $category->id }}" data-modal-toggle="authentication-modal-{{ $category->id }}" type="button" class="cursor-pointer text-blue-500 hover:text-blue-600">
-                                          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
-                                          </svg>
-                                          <p>Edit</p>
-                                        </a>
-                                        <!-- edit pop-up -->
-                                        <div id="authentication-modal-{{ $category->id }}" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
-                                          <div class="relative p-4 w-full max-w-md max-h-full">
-                                            <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-                                              <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
-                                                <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
-                                                  Edit Category
-                                                </h3>
-                                                <button type="button" class="end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="authentication-modal-{{ $category->id }}">
-                                                  <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-                                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
-                                                  </svg>
-                                                  <span class="sr-only">Close modal</span>
-                                                </button>
-                                              </div>
-                                              <div class="p-4 md:p-5">
-                                                <form class="space-y-4" action="{{ route('category.update', ['category' => $category]) }}" method="post">
-                                                  @csrf
-                                                  @method('put')
-                                                  <div>
-                                                    <label for="CategoryName" class="block mb-2 text-sm font-medium text-gray-900 ">New Category Name</label>
-                                                    <input type="text" name="CategoryName" id="CategoryName" value="{{ $category->name }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required>
-                                                  </div>                                                  
-                                                  <button type="submit" class="w-full text-white bg-blue-500 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center ">Edit</button>
-                                                </form>
-                                              </div>
-                                            </div>
-                                          </div>
-                                        </div>
+                                        <form action="{{ route('admin.accept', $event) }}" method="post">
+                                          @csrf
+                                          @method('PATCH')
+                                          <button data-modal-target="authentication-modal-{{ $event->id }}" data-modal-toggle="authentication-modal-{{ $event->id }}" type="submit" class="cursor-pointer text-green-500 hover:text-green-600">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                                            </svg>
+                                            <p>Accept</p>
+                                          </button>
+                                        </form>
                                         <!-- delete pop-up trigger -->
-                                        <a type="button" data-modal-target="popup-modal{{$category->id}}" data-modal-toggle="popup-modal{{$category->id}}" class=" cursor-pointer text-red-500 hover:text-red-600">
-                                          <i class="fa-solid fa-box-archive"></i>
-                                          <p>Delete</p>
-                                        </a>
+                                        <form action="{{ route('admin.refuse', $event) }}" method="post">
+                                          @csrf
+                                          @method('PUT')
+                                          <button type="submit" data-modal-target="popup-modal{{$event->id}}" data-modal-toggle="popup-modal{{$event->id}}" class=" cursor-pointer text-red-500 hover:text-red-600">
+                                            <i class="fa-solid fa-box-archive"></i>
+                                            <p>Refuse</p>
+                                          </button>
+                                        </form>
                                         <!-- delete pop-up -->
-                                        <div id="popup-modal{{$category->id}}" tabindex="-1" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+                                        <!-- <div id="popup-modal{{$event->id}}" tabindex="-1" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
                                           <div class="relative p-4 w-full max-w-md max-h-full">
                                             <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-                                              <button type="button" class="absolute top-3 end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="popup-modal{{$category->id}}">
+                                              <button type="button" class="absolute top-3 end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="popup-modal{{$event->id}}">
                                                 <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
                                                   <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
                                                 </svg>
                                                 <span class="sr-only">Close modal</span>
                                               </button>
-                                              <form class="p-4 md:p-5 text-center" method="post" action="{{ route('category.destroy', ['category' => $category]) }}">
+                                              <form class="p-4 md:p-5 text-center" method="post" action="{{ route('event.destroy', $event) }}">
                                                 @csrf
-                                                @method('DELETE')
+                                                @method('PATCH')
                                                 <svg class="mx-auto mb-4 text-gray-400 w-12 h-12 dark:text-gray-200" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
                                                   <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                                                 </svg>
                                                 <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Are you sure you want to archive this Category?</h3>
-                                                <button data-modal-hide="popup-modal{{$category->id}}" type="submit" class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center me-2">
+                                                <button data-modal-hide="popup-modal{{$event->id}}" type="submit" class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center me-2">
                                                   Yes, I'm sure
                                                 </button>
-                                                <button data-modal-hide="popup-modal{{$category->id}}" type="button" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">No, cancel</button>
+                                                <button data-modal-hide="popup-modal{{$event->id}}" type="button" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">No, cancel</button>
                                               </form>
                                             </div>
                                           </div>
-                                        </div>
+                                        </div> -->
                                       </div>
                                     </td>
                                   </tr>

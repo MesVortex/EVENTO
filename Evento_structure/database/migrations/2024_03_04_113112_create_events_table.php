@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('venue');
             $table->integer('availablePlaces');
             $table->enum('validationType', ['automatic', 'manual']);
-            $table->boolean('isValidByAdmin');
+            $table->enum('adminValidation', ['pending', 'accepted', 'rejected'])->default('pending');
             $table->unsignedBigInteger('organizerID');
             $table->foreign('organizerID')->references('id')->on('users')->onDelete('cascade');
             $table->unsignedBigInteger('categoryID');

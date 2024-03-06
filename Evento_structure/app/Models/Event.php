@@ -16,7 +16,7 @@ class Event extends Model
         'date',
         'availablePlaces',
         'validationType',
-        'isValidByAdmin',
+        'adminValidation',
         'categoryID',
         'organizerID'
     ];
@@ -24,5 +24,10 @@ class Event extends Model
     public function categories()
     {
         return $this->belongsTo(Category::class, 'categoryID');
+    }
+
+    public function organizers()
+    {
+        return $this->belongsTo(Organizer::class, 'organizerID');
     }
 }

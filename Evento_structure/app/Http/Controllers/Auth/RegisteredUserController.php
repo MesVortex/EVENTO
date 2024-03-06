@@ -39,7 +39,7 @@ class RegisteredUserController extends Controller
         ]);
 
         if ($request->role == 'client') {
-            $user->clients()->create([
+            $user->admins()->create([
                 'userID' => $user->id
             ]);
         } else {

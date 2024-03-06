@@ -42,7 +42,9 @@ class EventController extends Controller
             'organizerID' => $request->organizerID,
         ]);
 
-        return redirect()->back()->with('success', 'Event Added!');
+        return redirect('/organizer/dashboard');
+
+        // return redirect()->back()->with('success', 'Event Added!');
     }
 
     /**
@@ -78,7 +80,9 @@ class EventController extends Controller
             'organizerID' => $request->organizerID,
         ]);
 
-        return redirect()->back()->with('success', 'Event Updated!');
+        return redirect('/organizer/dashboard');
+
+        // return redirect()->back()->with('success', 'Event Updated!');
     }
 
     /**
@@ -88,5 +92,21 @@ class EventController extends Controller
     {
         $event->delete();
         return redirect()->back()->with('success', 'Event Deleted!');
+    }
+
+    public function acceptRequest(Event $event)
+    {
+        $event->update([
+            'adminValidation' => 'accepted'
+        ]);
+        return redirect()->back()->with('success', 'Event accepted!');
+    }
+
+    public function refuseRequest(Event $event)
+    {
+        $event->update([
+            'adminValidation' => 'rejected'
+        ]);
+        return redirect()->back()->with('success', 'Event refused!');
     }
 }

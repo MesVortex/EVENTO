@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Admin;
 use App\Models\Category;
 use App\Models\Client;
+use App\Models\Event;
 use App\Models\Organizer;
 use Illuminate\Http\Request;
 
@@ -24,6 +25,12 @@ class AdminController extends Controller
         $clients = Client::all();
         $organizers = Organizer::all();
         return view('admin.usersDashboard', compact('organizers', 'clients'));
+    }
+
+    public function eventRequests()
+    {
+        $events = Event::with('organizers')->where('adminValidation', 'pending')->get();
+        return view('admin.eventRequests', compact('events'));
     }
 
     /**
