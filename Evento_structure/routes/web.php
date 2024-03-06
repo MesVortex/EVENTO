@@ -32,7 +32,6 @@ Route::middleware(['auth', 'role:client'])->group(function () {
 Route::middleware(['auth', 'role:organizer'])->group(function () {
 
     Route::get('/organizer/dashboard', [OrganizerController::class, 'index'])->name('organizer.index');
-    Route::resource('/organizer/dashboard/event', EventController::class);
 });
 
 Route::middleware(['auth', 'role:admin'])->group(function () {
@@ -47,6 +46,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::put('/admin/dashboard/{organizer}/ban', [OrganizerController::class, 'ban'])->name('organizer.ban');
 });
 
+Route::resource('/organizer/dashboard/event', EventController::class);
 
 Route::get('/auth/{provider}/redirect', [ProviderController::class, 'redirect']);
 Route::get('/auth/{provider}/callback', [ProviderController::class, 'callback']);

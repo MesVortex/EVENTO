@@ -225,8 +225,8 @@
                                         <span class="mr-2">Event Organizer</span>
                                       </div>
                                     </th>
-                                    <th class="px-6 py-3 bg-gray-50 text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-                                      <div class="flex cursor-pointer">
+                                    <th colspan="3" class="px-6 py-3 bg-gray-50 text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                                      <div class="flex cursor-pointer justify-center">
                                         <span class="mr-2">Action</span>
                                       </div>
                                     </th>
@@ -242,31 +242,54 @@
                                       <p>{{$event->title}}</p>
                                     </td>
                                     <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5">
-                                      <p>{{$event->organizers->name}}</p>
+                                      <p>{{$event->organizers->users->name}}</p>
                                     </td>
                                     <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5">
                                       <div class="flex space-x-4">
+                                        <form action="{{ route('event.show', $event) }}" method="get">
+                                          @csrf
+                                          @method('GET')
+                                          <button type="submit" class="cursor-pointer text-blue-500 hover:text-blue-600">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                                            </svg>
+                                            <p>View</p>
+                                          </button>
+                                        </form>
+                                      </div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5">
+                                      <div class="flex space-x-4">
+
+
                                         <form action="{{ route('admin.accept', $event) }}" method="post">
                                           @csrf
                                           @method('PATCH')
-                                          <button data-modal-target="authentication-modal-{{ $event->id }}" data-modal-toggle="authentication-modal-{{ $event->id }}" type="submit" class="cursor-pointer text-green-500 hover:text-green-600">
+                                          <button type="submit" class="cursor-pointer text-green-500 hover:text-green-600">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
                                             </svg>
                                             <p>Accept</p>
                                           </button>
                                         </form>
+                                      </div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5">
+                                      <div class="flex space-x-4">
+
                                         <!-- delete pop-up trigger -->
                                         <form action="{{ route('admin.refuse', $event) }}" method="post">
                                           @csrf
                                           @method('PUT')
-                                          <button type="submit" data-modal-target="popup-modal{{$event->id}}" data-modal-toggle="popup-modal{{$event->id}}" class=" cursor-pointer text-red-500 hover:text-red-600">
+                                          <button type="submit" class=" cursor-pointer text-red-500 hover:text-red-600">
                                             <i class="fa-solid fa-box-archive"></i>
                                             <p>Refuse</p>
                                           </button>
                                         </form>
-                                        <!-- delete pop-up -->
-                                        <!-- <div id="popup-modal{{$event->id}}" tabindex="-1" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+                                      </div>
+                                    </td>
+                                    <!-- delete pop-up -->
+                                    <!-- <div id="popup-modal{{$event->id}}" tabindex="-1" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
                                           <div class="relative p-4 w-full max-w-md max-h-full">
                                             <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
                                               <button type="button" class="absolute top-3 end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="popup-modal{{$event->id}}">
@@ -290,8 +313,7 @@
                                             </div>
                                           </div>
                                         </div> -->
-                                      </div>
-                                    </td>
+
                                   </tr>
                                   @endforeach
                                 </tbody>
