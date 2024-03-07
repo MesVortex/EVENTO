@@ -207,9 +207,9 @@
               <p class="text-gray-700 text-base">
                 {{$event->validationType}}
               </p>
-              @if($event->isValidByAdmin)
+              @if($event->adminValidation == 'accepted')
               <p class="text-gray-700 text-base">
-                validated
+                accepted
               </p>
               @else
               <p class="text-gray-700 text-base">
@@ -221,12 +221,14 @@
               <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#{{$event->categories->name}}</span>
             </div>
             <div class="flex justify-between">
+              @if($event->validationType == 'manual')
               <a href="{{ route('event.reservations', $event) }}" data-modal-target="authentication-modal-{{ $event->id }}" data-modal-toggle="authentication-modal-{{ $event->id }}" type="button" class="cursor-pointer text-blue-500 hover:text-blue-600">
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
                 </svg>
                 <p>reservations</p>
               </a>
+              @endif
               <a href="{{ route('event.edit', ['event' => $event]) }}" data-modal-target="authentication-modal-{{ $event->id }}" data-modal-toggle="authentication-modal-{{ $event->id }}" type="button" class="cursor-pointer text-blue-500 hover:text-blue-600">
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />

@@ -37,11 +37,13 @@ class ReservationController extends Controller
             'eventID' => $request->event,
         ]);
 
-        $event = Event::find($request->event);
+        if ($request->validation == 1) {
+            $event = Event::find($request->event);
 
-        $event->update([
-            'availablePlaces' => ($event->availablePlaces - 1),
-        ]);
+            $event->update([
+                'availablePlaces' => ($event->availablePlaces - 1),
+            ]);
+        }
 
         return redirect()->back()->with('success', 'booked successefully!');
     }
@@ -52,6 +54,14 @@ class ReservationController extends Controller
     public function show(Reservation $reservation)
     {
         //
+    }
+
+    public function showEventReservations(Event $event)
+    {
+        $reservations = Reservation::where('eventID', $event->id)
+            ->where('isAcceptedByOrganizer', '0')
+            ->get();
+        return view('organizer.eventReservations', compact('reservations', 'event'));
     }
 
     /**
@@ -73,8 +83,31 @@ class ReservationController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Reservation $reservation)
+    public function destroy(Reservation $reservation, Request $request)
     {
-        //
+        $reservation->delete();
+
+        $event = Event::find($request->event);
+
+        $event->update([
+            'availablePlaces' => ($event->availablePlaces + 1),
+        ]);
+
+        return redirect()->back()->with('success', 'reservation deleted!');
+    }
+
+    public function acceptReservation(Reservation $reservation, Request $request)
+    {
+        $reservation->update([
+            'isAcceptedByOrganizer' => '1'
+        ]);
+
+        $event = Event::find($request->event);
+
+        $event->update([
+            'availablePlaces' => ($event->availablePlaces - 1),
+        ]);
+
+        return redirect()->back()->with('success', 'Reservation accepted!');
     }
 }

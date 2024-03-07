@@ -194,8 +194,8 @@
                     </div> <!-- section title -->
                 </div>
             </div> <!-- row -->
-            @foreach($events as $event)
             <div class="justify-center row">
+            @foreach($events as $event)
                 <div class="w-full sm:w-3/4 md:w-3/4 lg:w-1/3">
                     <div class="single-pricing pro">
                         <div class="absolute top-0 right-0 w-40 -mr-20 pricing-baloon">
@@ -256,8 +256,8 @@
                         </div>
                     </div> <!-- single pricing -->
                 </div>
+                @endforeach
             </div> <!-- row -->
-            @endforeach
         </div> <!-- container -->
     </section>
 

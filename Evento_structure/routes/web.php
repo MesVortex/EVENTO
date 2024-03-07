@@ -28,13 +28,16 @@ Route::get('/', function () {
 Route::middleware(['auth', 'role:client'])->group(function () {
 
     Route::get('/client/landingPage', [ClientController::class, 'index'])->name('client.index');
-    Route::get('/client/eventPage/{event}/show', [EventController::class, 'show'])->name('event.clientShow');
+    Route::get('/client/eventPage/event/{event}', [EventController::class, 'show'])->name('event.clientShow');
     Route::resource('client/eventPage/reservation', ReservationController::class);
 });
 
 Route::middleware(['auth', 'role:organizer'])->group(function () {
 
     Route::get('/organizer/dashboard', [OrganizerController::class, 'index'])->name('organizer.index');
+    Route::get('/organizer/dashboard/event/{event}/reservations', [ReservationController::class, 'showEventReservations'])->name('event.reservations');
+    Route::patch('/organizer/dashboard/reservation/accept/{reservation}', [ReservationController::class, 'acceptReservation'])->name('organizer.accept');
+    Route::delete('/organizer/dashboard/reservation/destroy/{reservation}', [ReservationController::class, 'destroy'])->name('reservation.refuse');
     Route::resource('/organizer/dashboard/event', EventController::class);
 });
 
