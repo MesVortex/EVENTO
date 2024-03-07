@@ -7,6 +7,7 @@ use App\Http\Controllers\ClientController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\OrganizerController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ReservationController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,6 +28,8 @@ Route::get('/', function () {
 Route::middleware(['auth', 'role:client'])->group(function () {
 
     Route::get('/client/landingPage', [ClientController::class, 'index'])->name('client.index');
+    Route::get('/client/eventPage/{event}/show', [EventController::class, 'show'])->name('event.clientShow');
+    Route::resource('client/eventPage/reservation', ReservationController::class);
 });
 
 Route::middleware(['auth', 'role:organizer'])->group(function () {
@@ -39,7 +42,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 
     Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.index');
     Route::get('/admin/dashboard/users', [AdminController::class, 'usersDash'])->name('admin.users');
-    Route::get('/admin/dashboard/requests', [AdminController::class, 'eventRequests'])->name('admin.requests');    
+    Route::get('/admin/dashboard/requests', [AdminController::class, 'eventRequests'])->name('admin.requests');
     Route::get('/admin/dashboard/requests/{event}/show', [EventController::class, 'show'])->name('event.adminShow');
     Route::patch('/admin/dashboard/requests/{event}/accept', [EventController::class, 'acceptRequest'])->name('admin.accept');
     Route::put('/admin/dashboard/requests/{event}/refuse', [EventController::class, 'destroy'])->name('admin.refuse');

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ReservationRequest;
+use App\Models\Event;
 use App\Models\Reservation;
 use Illuminate\Http\Request;
 
@@ -26,9 +28,22 @@ class ReservationController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(ReservationRequest $request)
     {
-        //
+        Reservation::create([
+            'placeNumber' => $request->placeNumber,
+            'isAcceptedByOrganizer' => $request->validation,
+            'clientID' => $request->client,
+            'eventID' => $request->event,
+        ]);
+
+        $event = Event::find($request->event);
+
+        $event->update([
+            'availablePlaces' => ($event->availablePlaces - 1),
+        ]);
+
+        return redirect()->back()->with('success', 'booked successefully!');
     }
 
     /**

@@ -33,6 +33,23 @@
       </p>
       @endif
     </div>
+    @if($event->availablePlaces > 0)
+    <form action="{{ route('reservation.store') }}" method="post">
+      @csrf
+      @method('POST')
+      <input type="hidden" name="client" value="{{ Auth::user()->clients->id }}">
+      <input type="hidden" name="event" value="{{ $event->id }}">
+      <input type="hidden" name="placeNumber" value="{{ $event->availablePlaces }}">
+      @if($event->validationType == 'automatic')
+      <input type="hidden" name="validation" value="1">
+      @else
+      <input type="hidden" name="validation" value="0">
+      @endif
+      <button>Reserve</button>
+    </form>
+    @else
+    <p> all places booked!</p>
+    @endif
     <div class="px-6 pt-4 pb-2">
       <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#{{$event->categories->name}}</span>
     </div>
