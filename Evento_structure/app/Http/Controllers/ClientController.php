@@ -13,7 +13,7 @@ class ClientController extends Controller
      */
     public function index()
     {
-        $events = Event::with('organizers','categories')->get();
+        $events = Event::with('organizers','categories')->where('adminValidation', 'accepted')->get();
         return view('client.landingPage', compact('events'));
     }
 
@@ -78,6 +78,5 @@ class ClientController extends Controller
             ]);
             return redirect()->back()->with('success', 'user Unbanned!');
         }
-        
     }
 }

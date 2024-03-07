@@ -47,8 +47,6 @@ class AuthenticatedSessionController extends Controller
                 abort('401', 'Your account is banned');
             }
         }
-
-        // return redirect()->intended(RouteServiceProvider::HOME);
     }
 
     /**
