@@ -102,11 +102,11 @@ class EventController extends Controller
         return redirect()->back()->with('success', 'Event accepted!');
     }
 
-    public function refuseRequest(Event $event)
-    {
-        $event->update([
-            'adminValidation' => 'rejected'
-        ]);
-        return redirect()->back()->with('success', 'Event refused!');
-    }
+    // public function refuseRequest(Event $event)
+    // {
+    //     $event->update([
+    //         'adminValidation' => 'rejected'
+    //     ]);
+    //     return redirect()->back()->with('success', 'Event refused!');
+    // }
 }

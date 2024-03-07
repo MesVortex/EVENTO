@@ -246,7 +246,7 @@
                                     </td>
                                     <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5">
                                       <div class="flex space-x-4">
-                                        <form action="{{ route('event.show', $event) }}" method="get">
+                                        <form action="{{ route('event.adminShow', $event) }}" method="get">
                                           @csrf
                                           @method('GET')
                                           <button type="submit" class="cursor-pointer text-blue-500 hover:text-blue-600">
@@ -260,8 +260,6 @@
                                     </td>
                                     <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5">
                                       <div class="flex space-x-4">
-
-
                                         <form action="{{ route('admin.accept', $event) }}" method="post">
                                           @csrf
                                           @method('PATCH')
@@ -276,7 +274,6 @@
                                     </td>
                                     <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5">
                                       <div class="flex space-x-4">
-
                                         <!-- delete pop-up trigger -->
                                         <form action="{{ route('admin.refuse', $event) }}" method="post">
                                           @csrf
@@ -313,7 +310,6 @@
                                             </div>
                                           </div>
                                         </div> -->
-
                                   </tr>
                                   @endforeach
                                 </tbody>

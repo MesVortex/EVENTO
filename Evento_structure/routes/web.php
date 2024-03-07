@@ -32,21 +32,22 @@ Route::middleware(['auth', 'role:client'])->group(function () {
 Route::middleware(['auth', 'role:organizer'])->group(function () {
 
     Route::get('/organizer/dashboard', [OrganizerController::class, 'index'])->name('organizer.index');
+    Route::resource('/organizer/dashboard/event', EventController::class);
 });
 
 Route::middleware(['auth', 'role:admin'])->group(function () {
 
     Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.index');
     Route::get('/admin/dashboard/users', [AdminController::class, 'usersDash'])->name('admin.users');
-    Route::get('/admin/dashboard/requests', [AdminController::class, 'eventRequests'])->name('admin.requests');
+    Route::get('/admin/dashboard/requests', [AdminController::class, 'eventRequests'])->name('admin.requests');    
+    Route::get('/admin/dashboard/requests/{event}/show', [EventController::class, 'show'])->name('event.adminShow');
     Route::patch('/admin/dashboard/requests/{event}/accept', [EventController::class, 'acceptRequest'])->name('admin.accept');
-    Route::put('/admin/dashboard/requests/{event}/refuse', [EventController::class, 'refuseRequest'])->name('admin.refuse');
+    Route::put('/admin/dashboard/requests/{event}/refuse', [EventController::class, 'destroy'])->name('admin.refuse');
     Route::resource('/admin/dashboard/category', CategoryController::class);
     Route::patch('/admin/dashboard/{client}/ban', [ClientController::class, 'ban'])->name('client.ban');
     Route::put('/admin/dashboard/{organizer}/ban', [OrganizerController::class, 'ban'])->name('organizer.ban');
 });
 
-Route::resource('/organizer/dashboard/event', EventController::class);
 
 Route::get('/auth/{provider}/redirect', [ProviderController::class, 'redirect']);
 Route::get('/auth/{provider}/callback', [ProviderController::class, 'callback']);
