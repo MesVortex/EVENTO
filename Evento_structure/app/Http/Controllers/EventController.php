@@ -35,13 +35,14 @@ class EventController extends Controller
     {
 
         $categories = Category::all();
-        $query = Event::where('adminValidation', 1);
+        $query = Event::where('adminValidation', 'accepted');
         if ($search = request('search')) {
-            $query->where('titre', 'like', '%' . $search . '%');
+            $query->where('title', 'like', '%' . $search . '%');
         }
-        $events = $query->get();
+        $events = $query->paginate(6);
         if ($events->isEmpty()) {
-            return redirect()->back()->with('alert', 'No results found.');
+            // return redirect()->back()->with('alert', 'No results found.');
+            return view('client.explore', compact('events', 'categories'));
         }
 
         return view('client.explore', compact('events', 'categories'));

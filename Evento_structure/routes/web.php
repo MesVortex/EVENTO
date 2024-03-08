@@ -31,6 +31,7 @@ Route::middleware(['auth', 'role:client'])->group(function () {
     Route::get('/client/eventPage/event/{event}', [EventController::class, 'show'])->name('event.clientShow');
     Route::get('/client/event/explore', [EventController::class, 'explore'])->name('event.explore');
     Route::post('/client/event/explore/filter', [EventController::class, 'filter'])->name('event.filter');
+    Route::get('/client/event/explore/search', [EventController::class, 'search'])->name('event.search');
     Route::resource('client/eventPage/reservation', ReservationController::class);
 });
 
