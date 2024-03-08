@@ -13,7 +13,7 @@ class ClientController extends Controller
      */
     public function index()
     {
-        $events = Event::with('organizers','categories')->where('adminValidation', 'accepted')->get();
+        $events = Event::with('organizers','categories')->where('adminValidation', 'accepted')->limit(3)->get();
         return view('client.landingPage', compact('events'));
     }
 

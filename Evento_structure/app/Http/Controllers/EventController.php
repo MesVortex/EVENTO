@@ -17,6 +17,36 @@ class EventController extends Controller
         //
     }
 
+    public function explore()
+    {
+        $events = Event::where('adminValidation', 'accepted')->paginate(6);
+        $categories = Category::all();
+        return view('client.explore', compact('events', 'categories'));
+    }
+
+    public function filter(Request $request)
+    {
+        $events = Event::where('categoryID', $request->categoryID)->paginate(6);
+        $categories = Category::all();
+        return view('client.explore', compact('events', 'categories'));
+    }
+
+    public function search(Request $request)
+    {
+
+        $categories = Category::all();
+        $query = Event::where('adminValidation', 1);
+        if ($search = request('search')) {
+            $query->where('titre', 'like', '%' . $search . '%');
+        }
+        $events = $query->get();
+        if ($events->isEmpty()) {
+            return redirect()->back()->with('alert', 'No results found.');
+        }
+
+        return view('client.explore', compact('events', 'categories'));
+    }
+
     /**
      * Show the form for creating a new resource.
      */

@@ -37,13 +37,11 @@ class ReservationController extends Controller
             'eventID' => $request->event,
         ]);
 
-        if ($request->validation == 1) {
-            $event = Event::find($request->event);
+        $event = Event::find($request->event);
 
-            $event->update([
-                'availablePlaces' => ($event->availablePlaces - 1),
-            ]);
-        }
+        $event->update([
+            'availablePlaces' => ($event->availablePlaces - 1),
+        ]);
 
         return redirect()->back()->with('success', 'booked successefully!');
     }
@@ -96,16 +94,10 @@ class ReservationController extends Controller
         return redirect()->back()->with('success', 'reservation deleted!');
     }
 
-    public function acceptReservation(Reservation $reservation, Request $request)
+    public function acceptReservation(Reservation $reservation)
     {
         $reservation->update([
             'isAcceptedByOrganizer' => '1'
-        ]);
-
-        $event = Event::find($request->event);
-
-        $event->update([
-            'availablePlaces' => ($event->availablePlaces - 1),
         ]);
 
         return redirect()->back()->with('success', 'Reservation accepted!');
