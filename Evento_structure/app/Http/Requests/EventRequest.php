@@ -26,7 +26,7 @@ class EventRequest extends FormRequest
             'venue' => ['required', 'string'],
             'availablePlaces' => ['required', 'integer'],
             'description' => ['required', 'string'],
-            'date' => ['required'],
+            'date' => ['required', 'after:today'],
             'validationType' => ['required', 'string'],
             'category' => ['required', 'integer'],
             'organizerID' => ['required', 'integer'],

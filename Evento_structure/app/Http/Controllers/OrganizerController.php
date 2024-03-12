@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Event;
 use App\Models\Organizer;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class OrganizerController extends Controller
 {
@@ -15,6 +16,14 @@ class OrganizerController extends Controller
     {
         $events =Event::all();
         return view('organizer.dashboard', compact('events'));
+    }
+
+    public function statistics()
+    {
+        $organizerID = Auth::user()->organizers->id;
+        $eventCount =Event::where('organizerID', $organizerID)->count();
+        $reservationtCount =Event::where('organizerID', $organizerID)->count();
+        return view('organizer.statistics', compact('eventCount', 'reservationtCount'));
     }
 
     /**

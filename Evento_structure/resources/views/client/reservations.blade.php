@@ -13,7 +13,7 @@
   <title>Evento</title>
 
   <!--====== Favicon Icon ======-->
-  <link rel="shortcut icon" href="{{asset('images/EventoLogoTop.png')}}" type="image/png">
+  <link rel="shortcut icon" href="{{asset('images/Logo_no_bg.png')}}" type="image/png">
 
   <!--====== Slick css ======-->
   <link rel="stylesheet" href="{{asset('css/slick.css')}}">
@@ -33,6 +33,7 @@
 
   <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js"></script>
 
+  <script src="https://unpkg.com/tailwindcss-jit-cdn"></script>
 
 
 </head>
@@ -57,24 +58,21 @@
                 <span class="toggler-icon"></span>
               </button>
 
-
-
               <!-- justify-center hidden md:flex collapse navbar-collapse sub-menu-bar -->
               <div class="absolute left-0 z-30 hidden w-full px-5 py-3 duration-300 bg-white shadow md:opacity-100 md:w-auto collapse navbar-collapse md:block top-100 mt-full md:static md:bg-transparent md:shadow-none" id="navbarOne">
                 <ul class="items-center content-start mr-auto lg:justify-center md:justify-end navbar-nav md:flex">
                   <!-- flex flex-row mx-auto my-0 navbar-nav -->
+                  <li class="nav-item">
+                    <a class="page-scroll" href="{{route('client.index')}}">HOME</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="page-scroll" href="{{route('event.explore')}}">Explore</a>
+                  </li>
                   <li class="nav-item active">
-                    <a href="{{route('client.index')}}">HOME</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="page-scroll" href="#pricing">Events</a>
-                  </li>
-                  <li class="nav-item">
                     <a class="page-scroll" href="{{ route('client.reservations') }}">Your Reservations</a>
                   </li>
                 </ul>
               </div>
-
 
               <div class="items-center justify-end hidden navbar-social lg:flex">
                 <form method="get" action="{{ route('event.search') }}" class=" mr-6 relative mx-auto text-gray-600">
@@ -127,139 +125,52 @@
         </div> <!-- row -->
       </div> <!-- container -->
     </div> <!-- navgition -->
-
-    <div id="home" class="relative z-10 header-hero" style="background-image: url({{asset('images/header-bg.jpg')}}); background-position: center">
-      <div class="container">
-        <div class="justify-center row">
-          <div class="w-full lg:w-5/6 xl:w-2/3">
-            <div class="pt-48 pb-64 text-center header-content">
-
-              <h1 class="mb-4 text-4xl font-extrabold leading-none tracking-tight text-white md:text-5xl lg:text-6xl dark:text-white">Discover and <mark class="px-2 text-white bg-purple-600 rounded dark:bg-purple-500">Book</mark></h1>
-              <p class="text-lg font-normal text-gray-300 lg:text-xl dark:text-gray-400">Reserve Your Seat for an Unforgettable Event Experience!</p>
-            </div> <!-- header content -->
-          </div>
-        </div> <!-- row -->
-      </div> <!-- container -->
-      <div class="absolute bottom-0 z-20 w-full h-auto -mb-1 header-shape">
-        <img src="{{asset('images/header-shape.svg')}}" alt="shape">
-      </div>
-    </div> <!-- header content -->
   </header>
 
-  <!--====== HEADER PART ENDS ======-->
-
-
-
-
-
-  <!--====== PRICING PART START ======-->
-
-
-
-  <section id="pricing" class="bg-gray-100 pricing-area py- py-100">
-    <div class="flex flex-wrap p-20 gap-5 justify-center">
-      <form action="{{ route('event.filter') }}" method="get">
-        @csrf
-        @method('GET')
-        <input type="hidden" name="categoryID" value="all">
-        <button class="relative px-5 py-2 font-medium text-white group">
-          <span class="absolute inset-0 w-full h-full transition-all duration-300 ease-out transform translate-x-0 -skew-x-12 bg-purple-500 group-hover:bg-purple-700 group-hover:skew-x-12"></span>
-          <span class="absolute inset-0 w-full h-full transition-all duration-300 ease-out transform skew-x-12 bg-purple-700 group-hover:bg-purple-500 group-hover:-skew-x-12"></span>
-          <span class="absolute bottom-0 left-0 hidden w-10 h-20 transition-all duration-100 ease-out transform -translate-x-8 translate-y-10 bg-purple-600 -rotate-12"></span>
-          <span class="absolute bottom-0 right-0 hidden w-10 h-20 transition-all duration-100 ease-out transform translate-x-10 translate-y-8 bg-purple-400 -rotate-12"></span>
-          <span class="relative">All</span>
-        </button>
-      </form>
-      @foreach($categories as $category)
-      <form action="{{ route('event.filter') }}" method="post">
-        @csrf
-        @method('POST')
-        <input type="hidden" name="categoryID" value="{{ $category->id }}">
-        <button class="relative px-5 py-2 font-medium text-white group">
-          <span class="absolute inset-0 w-full h-full transition-all duration-300 ease-out transform translate-x-0 -skew-x-12 bg-purple-500 group-hover:bg-purple-700 group-hover:skew-x-12"></span>
-          <span class="absolute inset-0 w-full h-full transition-all duration-300 ease-out transform skew-x-12 bg-purple-700 group-hover:bg-purple-500 group-hover:-skew-x-12"></span>
-          <span class="absolute bottom-0 left-0 hidden w-10 h-20 transition-all duration-100 ease-out transform -translate-x-8 translate-y-10 bg-purple-600 -rotate-12"></span>
-          <span class="absolute bottom-0 right-0 hidden w-10 h-20 transition-all duration-100 ease-out transform translate-x-10 translate-y-8 bg-purple-400 -rotate-12"></span>
-          <span class="relative">{{$category->name}}</span>
-        </button>
-      </form>
-      @endforeach
-    </div>
-    <div class="container">
-      <div class="justify-center row">
-        @foreach($events as $event)
-        <div class="w-full sm:w-3/4 md:w-3/4 lg:w-1/3">
-          <div class="single-pricing pro">
-            <div class="absolute top-0 right-0 w-40 -mr-20 pricing-baloon">
-              <img src="{{asset('images/baloon.svg')}}" alt="baloon">
+  <div class="grid grid-cols-12 gap-6 mt-20">
+    <div class="grid grid-cols-12 col-span-12 gap-6 xxl:col-span-9">
+      <div class="col-span-12 px-10">
+        <div class="w-full mx-auto my-10 bg-white p-8 rounded-xl shadow shadow-slate-300">
+          <div class="flex flex-row justify-between items-center">
+            <div>
+              <h1 class="text-3xl font-medium">Reservations list</h1>
             </div>
-            <div class="pricing-header">
-              <h5 class="sub-title">{{ $event->categories->name }}</h5>
-              <span class="price">{{ $event->title }}</span>
-              <p class="year">By {{ $event->organizers->users->name }}</p>
-            </div>
-            <div class="mb-8 pricing-list">
-              <ul>
-                <li><i class="fa-solid fa-map-pin text-purple-600"></i><span class=" font-bold">Happening At</span> <span class="italic text-gray-600">{{ $event->venue }}</span> </li>
-                <li><i class="fa-solid fa-ticket text-purple-600"></i><span class="font-bold">Available Tickets:</span> <span class="italic text-gray-600">{{ $event->availablePlaces }}</span></li>
-                <li><i class="fa-regular fa-calendar-days text-purple-600"></i><span class="font-bold">Special Day:</span> <span class="italic text-gray-600">{{ $event->date }}</span></li>
-              </ul>
-            </div>
-            <div class="text-center pricing-btn">
-              <a href="{{ route('event.clientShow', $event) }}" class="relative inline-flex items-center justify-start px-6 py-3 overflow-hidden font-medium transition-all bg-white rounded hover:bg-white group">
-                <span class="w-48 h-48 rounded rotate-[-40deg] bg-purple-600 absolute bottom-0 left-0 -translate-x-full ease-out duration-500 transition-all translate-y-full mb-9 ml-9 group-hover:ml-0 group-hover:mb-32 group-hover:translate-x-0"></span>
-                <span class="relative w-full text-left text-black transition-colors duration-300 ease-in-out group-hover:text-white">Read More</span>
-              </a>
-            </div>
-            <div class="bottom-shape">
-              <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 350 112.35">
-                <defs>
-                  <style>
-                    .color-2 {
-                      fill: rgb(147 51 234);
-                      isolation: isolate;
-                    }
-
-                    .cls-1 {
-                      opacity: 0.1;
-                    }
-
-                    .cls-2 {
-                      opacity: 0.2;
-                    }
-
-                    .cls-3 {
-                      opacity: 0.4;
-                    }
-
-                    .cls-4 {
-                      opacity: 0.6;
-                    }
-                  </style>
-                </defs>
-                <title>bottom-part1</title>
-                <g id="bottom-part">
-                  <g id="Group_747" data-name="Group 747">
-                    <path id="Path_294" data-name="Path 294" class="cls-1 color-2" d="M0,24.21c120-55.74,214.32,2.57,267,0S349.18,7.4,349.18,7.4V82.35H0Z" transform="translate(0 0)" />
-                    <path id="Path_297" data-name="Path 297" class="cls-2 color-2" d="M350,34.21c-120-55.74-214.32,2.57-267,0S.82,17.4.82,17.4V92.35H350Z" transform="translate(0 0)" />
-                    <path id="Path_296" data-name="Path 296" class="cls-3 color-2" d="M0,44.21c120-55.74,214.32,2.57,267,0S349.18,27.4,349.18,27.4v74.95H0Z" transform="translate(0 0)" />
-                    <path id="Path_295" data-name="Path 295" class="cls-4 color-2" d="M349.17,54.21c-120-55.74-214.32,2.57-267,0S0,37.4,0,37.4v74.95H349.17Z" transform="translate(0 0)" />
-                  </g>
-                </g>
-              </svg>
-            </div>
-          </div> <!-- single pricing -->
+          </div>
+          <p class="text-slate-500 my-4">Hello, here are all your reservations</p>
+          <ul class="bg-white shadow overflow-hidden sm:rounded-md mx-auto mt-16">
+            @foreach($reservations as $reservation)
+            @if($reservation->isAcceptedByOrganizer)
+            <li class="border-t border-gray-200 hover:bg-slate-600">
+              <div class="px-4 py-5 sm:px-6">
+                <div class="flex items-center justify-between">
+                  <h3 class="text-lg leading-6 font-medium text-gray-900"><span class=" font-bold capitalize">reservation for:</span> {{ $reservation->events->title }}</h3>
+                  <p class="mt-1 max-w-2xl text-sm text-gray-500"><span class=" font-bold capitalize">organized by:</span> {{ $reservation->events->organizers->users->name }}</p>
+                </div>
+                <div class="mt-4 flex items-center justify-between">
+                  <p class="text-sm font-medium text-gray-500">Status: <span class="text-green-600">Accepted</span></p>
+                  <a href="{{ route('ticket', $reservation) }}" class="font-medium text-indigo-600 hover:text-indigo-500">View Ticket</a>
+                </div>
+              </div>
+            </li>
+            @else
+            <li class="border-t border-gray-200 hover:bg-slate-600">
+              <div class="px-4 py-5 sm:px-6">
+                <div class="flex items-center justify-between">
+                  <h3 class="text-lg leading-6 font-medium text-gray-900"><span class=" font-bold capitalize">reservation for:</span> {{ $reservation->events->title }}</h3>
+                  <p class="mt-1 max-w-2xl text-sm text-gray-500"><span class=" font-bold capitalize">organized by:</span> {{ $reservation->events->organizers->users->name }}</p>
+                </div>
+                <div class="mt-4 flex items-center justify-between">
+                  <p class="text-sm font-medium text-gray-500">Status: <span class="text-yellow-600">Pending</span></p>
+                </div>
+              </div>
+            </li>
+            @endif
+            @endforeach
+          </ul>
         </div>
-        @endforeach
-      </div> <!-- row -->
+      </div>
     </div>
-    <!-- container -->
-    <div class="paginate">
-      {{ $events->links() }}
-    </div>
-  </section>
-  <!--====== PRICING PART ENDS ======-->
-
+  </div>
   <!--====== FOOTER PART START ======-->
 
   <footer id="footer" class="bg-gray-100 footer-area pt-32">
@@ -362,7 +273,6 @@
   <!--====== Main js ======-->
   <script src="{{asset('js/main.js')}}"></script>
 
-  <script src="https://unpkg.com/tailwindcss-jit-cdn"></script>
 
 
 </body>

@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Models\Client;
 use App\Models\Event;
 use App\Models\Organizer;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -18,6 +19,19 @@ class AdminController extends Controller
     {
         $categories = Category::all();
         return view('admin.dashboard', compact('categories'));
+    }
+
+    public function statistics()
+    {
+        $categories = Category::count();
+        $users = User::count();
+        $organizers = Organizer::count();
+        $clients = Client::count();
+        $bannedClients = Client::where('isBanned', '1')->count();
+        $bannedOrganizers = Organizer::where('isBanned', '1')->count();        
+        $events = Event::count();
+        $pendingEvents = Event::where('adminValidation', 'pending')->count();
+        return view('admin.statistics', compact('categories', 'users', 'organizers', 'clients', 'events', 'pendingEvents', 'bannedOrganizers', 'bannedClients'));
     }
 
     public function usersDash()

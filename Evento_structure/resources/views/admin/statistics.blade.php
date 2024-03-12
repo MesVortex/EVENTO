@@ -9,42 +9,56 @@
   <!-- Favicon -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
-  <script src="https://unpkg.com/tailwindcss-jit-cdn"></script>
 </head>
 
 <body>
   <div class="flex h-screen bg-gray-800 " :class="{ 'overflow-hidden': isSideMenuOpen }">
+
     <!-- Desktop sidebar -->
     <aside class="z-20 flex-shrink-0 hidden w-60 pl-2 overflow-y-auto bg-gray-800 md:block">
       <div>
         <div class="text-white">
           <div class="flex p-5 bg-gray-800">
-            <img class="h-9 mx-auto" src="{{asset('images/webSiteName.png')}}">
+            <img class="h-9 mx-auto " src="{{asset('images/webSiteName.png')}}">
           </div>
           <div class="flex justify-center">
-            <div class="">
-              <img class="hidden h-24 w-24 rounded-full sm:block object-cover mr-2 border-4 border-purple-600" src="{{asset('images/organizer.png')}}" alt="">
-              <p class="font-bold text-base capitalize  text-gray-400 pt-2 text-center w-24">Mr. {{ Auth::user()->name }}</p>
+            <div class=" ">
+              <img class="hidden h-24 w-24 rounded-full sm:block object-cover mr-2 border-4 border-purple-600" src="{{asset('images/admin.png')}}" alt="">
+              <p class="font-bold text-base  text-gray-400 pt-2 text-center w-24">Mr. {{ Auth::user()->name }}</p>
             </div>
           </div>
           <div>
             <ul class="mt-6 leading-10">
               <li class="relative px-2 py-1 ">
-                <a href="{{route('organizer.index')}}" class="inline-flex items-center w-full text-sm font-semibold text-white transition-colors duration-150 cursor-pointer hover:text-purple-600">
+                <a href="{{route('admin.requests')}}" class="inline-flex items-center w-full text-sm font-semibold text-white transition-colors duration-150 cursor-pointer hover:text-purple-600">
                   <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
                   </svg>
-                  <span class="ml-4">EVENTS</span>
+                  <span class="ml-4">Statistics</span>
                 </a>
               </li>
-              <li class="relative px-2 py-1" x-data="{ Open : false  }">
-                <a href="{{ route('organizer.statistics') }}" class="inline-flex items-center justify-between w-full text-base font-semibold transition-colors duration-150 text-gray-500  hover:text-yellow-400 cursor-pointer">
-                  <span class="inline-flex items-center  text-sm font-semibold text-white hover:text-purple-600">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 4H6a2 2 0 00-2 2v12a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-2m-4-1v8m0 0l3-3m-3 3L9 8m-5 5h2.586a1 1 0 01.707.293l2.414 2.414a1 1 0 00.707.293h3.172a1 1 0 00.707-.293l2.414-2.414a1 1 0 01.707-.293H20" />
-                    </svg>
-                    <span class="ml-4">STATISTICS</span>
-                  </span>
+              <li class="relative px-2 py-1 ">
+                <a href="{{route('admin.index')}}" class="inline-flex items-center w-full text-sm font-semibold text-white transition-colors duration-150 cursor-pointer hover:text-purple-600">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                  </svg>
+                  <span class="ml-4">Categories</span>
+                </a>
+              </li>
+              <li class="relative px-2 py-1 ">
+                <a href="{{route('admin.users')}}" class="inline-flex items-center w-full text-sm font-semibold text-white transition-colors duration-150 cursor-pointer hover:text-purple-600">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                  </svg>
+                  <span class="ml-4">Users</span>
+                </a>
+              </li>
+              <li class="relative px-2 py-1 ">
+                <a href="{{route('admin.requests')}}" class="inline-flex items-center w-full text-sm font-semibold text-white transition-colors duration-150 cursor-pointer hover:text-purple-600">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                  </svg>
+                  <span class="ml-4">Requests</span>
                 </a>
               </li>
             </ul>
@@ -62,7 +76,7 @@
         <div class="text-white">
           <div class="flex p-2  bg-gray-800">
             <div class="flex py-3 px-2 items-center">
-              <img src="{{asset('images/organizer.png')}}" alt="test">
+              <img src="" alt="">
             </div>
           </div>
           <div>
@@ -163,100 +177,35 @@
         </div>
       </header>
       <main class="">
-        <div class="flex flex-wrap h-auto mb-4 pb-10 px-8 mx-4 rounded-3xl bg-gray-100 border-4 border-purple-600">
-          <div class="w-full flex justify-center mt-10 mb-5">
-            <h2 class="text-3xl font-bold text-purple-600 capitalize">Modifying Event</h2>
+        <div class="grid h-screen mb-4 pb-10 px-8 mx-4 rounded-3xl bg-gray-100 border-4 border-purple-600">
+          <div class="container m-auto px-6 text-gray-500 md:px-12 xl:px-0">
+            <div class="mx-auto grid gap-6 md:w-3/4 lg:w-full lg:grid-cols-3">
+              <div class="bg-white rounded-2xl shadow-xl px-8 py-12 sm:px-12 lg:px-8">
+                <div class="mb-12 space-y-4">
+                  <h3 class="text-2xl font-semibold text-purple-900">Categories</h3>
+                  <p class="mb-6">We're excited to announce that our platform now boasts a total of <span class="font-bold text-purple-600 text-lg">{{$categories}}</span> distinct categories! This expansion reflects the diverse interests and vibrant discussions within our community</p>
+                  <a href="{{route('admin.index')}}" class="block font-medium text-purple-600">Know more</a>
+                </div>
+                <img src="https://tailus.io/sources/blocks/end-image/preview/images/graphic.svg" class="w-2/3 ml-auto -mb-12" alt="illustration" loading="lazy" width="900" height="600">
+              </div>
+              <div class="bg-white rounded-2xl shadow-xl px-8 py-12 sm:px-12 lg:px-8">
+                <div class="mb-12 space-y-4">
+                  <h3 class="text-2xl font-semibold text-purple-900">Users</h3>
+                  <p class="mb-6">Today, we're thrilled to announce that our platform has reached a milestone of <span class="font-bold text-purple-600 text-lg">{{$users}}</span> active users, including <span class="font-bold text-purple-600 text-lg">{{$organizers}}</span> organizers, <span class="font-bold text-purple-600 text-lg">{{$clients}}</span> clients, and even those who have faced temporary bans who number <span class="font-bold text-red-600 text-lg">{{$bannedClients + $bannedOrganizers}}</span> users.</p>
+                  <a href="{{route('admin.users')}}" class="block font-medium text-purple-600">Know more</a>
+                </div>
+                <img src="https://tailus.io/sources/blocks/end-image/preview/images/ui-design.svg" class="w-2/3 ml-auto" alt="illustration" loading="lazy" width="900" height="600">
+              </div>
+              <div class="bg-white rounded-2xl shadow-xl px-8 py-12 sm:px-12 lg:px-8">
+                <div class="mb-12 space-y-4">
+                  <h3 class="text-2xl font-semibold text-purple-900">Events</h3>
+                  <p class="mb-6">Currently, our platform proudly hosts a total of <span class="font-bold text-purple-600 text-lg">{{$events}}</span> events, with an additional <span class="font-bold text-purple-600 text-lg">{{$pendingEvents}}</span> events pending waiting for your approval.</p>
+                  <a href="{{route('admin.requests')}}" class="block font-medium text-purple-600">Know more</a>
+                </div>
+                <img src="https://tailus.io/sources/blocks/end-image/preview/images/ux-design.svg" class="w-2/3 ml-auto " alt="illustration" loading="lazy" width="900" height="600">
+              </div>
+            </div>
           </div>
-          <form class="w-full" method="post" action="{{ route('event.update', ['event' => $event]) }}">
-            @csrf
-            @method('PUT')
-            <div class="flex flex-wrap -mx-3 mb-6">
-              <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
-                  title
-                </label>
-                <input name="title" value="{{ $event->title }}" class="appearance-none block w-full bg-purple-300 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-first-name" type="text">
-              </div>
-              <div class="w-full md:w-1/2 px-3">
-                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">
-                  venue
-                </label>
-                <input name="venue" value="{{ $event->venue }}" class="appearance-none block w-full bg-purple-300 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-last-name" type="text">
-              </div>
-              <div class="w-full px-3">
-                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">
-                  Available places
-                </label>
-                <input name="availablePlaces" value="{{ $event->availablePlaces }}" class="appearance-none block w-full bg-purple-300 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-last-name" type="text">
-              </div>
-            </div>
-            <div class="flex flex-wrap -mx-3 mb-6">
-              <div class="w-full px-3">
-                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-password">
-                  description
-                </label>
-                <textarea name="description" class="appearance-none block w-full bg-purple-300 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-password" rows="4">{{ $event->description }}</textarea>
-                <p class="text-gray-600 text-xs italic">Make it as long and as crazy as you'd like</p>
-              </div>
-            </div>
-            <div class="flex flex-wrap -mx-3 mb-2">
-              <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-city">
-                  date
-                </label>
-                <input name="date" class="appearance-none block w-full bg-purple-300 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-city" type="date" placeholder="Albuquerque">
-              </div>
-              <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-state">
-                  Validation Type
-                </label>
-                <div class="relative">
-                  <select name="validationType" class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-state">
-                    @if($event->validationType == 'automatic')
-                    <option selected value="automatic">Auto</option>
-                    <option value="manual">Manual</option>
-                    @else
-                    <option value="automatic">Auto</option>
-                    <option selected value="manual">Manual</option>
-                    @endif
-                  </select>
-                  <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-                    <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                      <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
-                    </svg>
-                  </div>
-                </div>
-              </div>
-              <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-zip">
-                  Category
-                </label>
-                <div class="relative">
-                  <select name="category" class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-state">
-                    @foreach($categories as $category)
-                    @if($event->categoryID == $category->id)
-                    <option selected value="{{$category->id}}">{{$category->name}}</option>
-                    @else
-                    <option value="{{$category->id}}">{{$category->name}}</option>
-                    @endif
-                    @endforeach
-                  </select>
-                  <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-                    <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                      <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
-                    </svg>
-                  </div>
-                </div>
-              </div>
-              <input type="hidden" name="organizerID" value="{{ Auth::user()->organizers->id }}">
-            </div>
-            <button class="inline-flex items-center justify-center px-5 py-3 mt-5 text-base font-medium text-center text-purple-100 border border-purple-500 rounded-lg shadow-sm cursor-pointer hover:text-white bg-gradient-to-br from-purple-500 via-indigo-500 to-indigo-500">
-              <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-              </svg>
-              <span class="relative capitalize">modify event</span>
-            </button>
-          </form>
         </div>
       </main>
     </div>

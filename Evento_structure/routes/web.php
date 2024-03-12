@@ -30,7 +30,9 @@ Route::middleware(['auth', 'role:client'])->group(function () {
     Route::get('/client/landingPage', [ClientController::class, 'index'])->name('client.index');
     Route::get('/client/eventPage/event/{event}', [EventController::class, 'show'])->name('event.clientShow');
     Route::get('/client/event/explore', [EventController::class, 'explore'])->name('event.explore');
-    Route::post('/client/event/explore/filter', [EventController::class, 'filter'])->name('event.filter');
+    Route::get('/client/home/reservations', [ClientController::class, 'clientReservations'])->name('client.reservations');
+    Route::get('/client/reservation/ticket/{reservation}', [ClientController::class, 'ticket'])->name('ticket');
+    Route::get('/client/event/explore/filter', [EventController::class, 'filter'])->name('event.filter');
     Route::get('/client/event/explore/search', [EventController::class, 'search'])->name('event.search');
     Route::resource('client/eventPage/reservation', ReservationController::class);
 });
@@ -38,6 +40,7 @@ Route::middleware(['auth', 'role:client'])->group(function () {
 Route::middleware(['auth', 'role:organizer'])->group(function () {
 
     Route::get('/organizer/dashboard', [OrganizerController::class, 'index'])->name('organizer.index');
+    Route::get('/organizer/statistics', [OrganizerController::class, 'statistics'])->name('organizer.statistics');
     Route::get('/organizer/dashboard/event/{event}/reservations', [ReservationController::class, 'showEventReservations'])->name('event.reservations');
     Route::patch('/organizer/dashboard/reservation/accept/{reservation}', [ReservationController::class, 'acceptReservation'])->name('organizer.accept');
     Route::delete('/organizer/dashboard/reservation/destroy/{reservation}', [ReservationController::class, 'destroy'])->name('reservation.refuse');
@@ -47,6 +50,7 @@ Route::middleware(['auth', 'role:organizer'])->group(function () {
 Route::middleware(['auth', 'role:admin'])->group(function () {
 
     Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.index');
+    Route::get('/admin/dashboard/statistics', [AdminController::class, 'statistics'])->name('admin.statistics');
     Route::get('/admin/dashboard/users', [AdminController::class, 'usersDash'])->name('admin.users');
     Route::get('/admin/dashboard/requests', [AdminController::class, 'eventRequests'])->name('admin.requests');
     Route::get('/admin/dashboard/requests/{event}/show', [EventController::class, 'show'])->name('event.adminShow');
@@ -62,9 +66,9 @@ Route::get('/auth/{provider}/redirect', [ProviderController::class, 'redirect'])
 Route::get('/auth/{provider}/callback', [ProviderController::class, 'callback']);
 
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+// Route::get('/dashboard', function () {
+//     return view('dashboard');
+// })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

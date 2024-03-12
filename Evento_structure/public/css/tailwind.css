@@ -1193,7 +1193,7 @@ p {
   left: 0;
   width: 100%;
   height: 100%;
-  --bg-opacity: 0.3;
+  --bg-opacity: 0.9;
   /* background-color: #bee3f8; */
   background-color: rgba(0, 0, 0, var(--bg-opacity));
 }
@@ -1267,8 +1267,8 @@ p {
   padding-bottom: 0.75rem;
   font-weight: 700;
   --text-opacity: 1;
-  color: #1a202c;
-  color: rgba(26, 32, 44, var(--text-opacity));
+  color: #5e636e;
+  /* color: rgba(26, 32, 44, var(--text-opacity)); */
   text-transform: uppercase;
   transition-duration: 300ms;
 }
@@ -1276,8 +1276,7 @@ p {
 .navbar-nav .nav-item.active a,
 .navbar-nav .nav-item a:hover {
   --text-opacity: 1;
-  color: #3182ce;
-  color: rgba(49, 130, 206, var(--text-opacity));
+  color: rgba(147, 51, 234, var(--text-opacity));
 }
 
 .navbar-nav .nav-item.active a::before,
@@ -1296,8 +1295,7 @@ p {
   height: 0.25rem;
   transition-duration: 300ms;
   --bg-opacity: 1;
-  background-color: #3182ce;
-  background-color: rgba(49, 130, 206, var(--bg-opacity));
+  background-color: rgba(147, 51, 234, var(--bg-opacity));
   opacity: 0;
 }
 
@@ -1358,8 +1356,7 @@ p {
 .services-icon i {
   font-size: 64px;
   --text-opacity: 1;
-  color: #3182ce;
-  color: rgba(49, 130, 206, var(--text-opacity));
+  color: rgba(147, 51, 234, var(--text-opacity));
 }
 
 .services-image {
@@ -1372,6 +1369,7 @@ p {
   width: 33.333333%;
   height: 100%;
   margin-right: 2rem;
+  margin-top: 4rem;
 }
 
 @media (max-width: 1024px) {
@@ -1391,6 +1389,7 @@ p {
 
 .single-pricing {
   position: relative;
+  height: 100%;
   z-index: 10;
   padding-left: 1.25rem;
   padding-right: 1.25rem;
@@ -1425,23 +1424,20 @@ p {
   height: 0.25rem;
   margin: auto;
   --bg-opacity: 1;
-  background-color: #81e6d9;
-  background-color: rgba(129, 230, 217, var(--bg-opacity));
+  background-color: rgba(147, 51, 234, var(--bg-opacity));
 }
 
 .pro .sub-title::after {
   margin-left: 0;
   --bg-opacity: 1;
-  background-color: #3182ce;
-  background-color: rgba(49, 130, 206, var(--bg-opacity));
+  background-color: rgba(147, 51, 234, var(--bg-opacity));
 }
 
 .enterprise .sub-title::after {
   margin-left: auto;
   margin-right: 0;
   --bg-opacity: 1;
-  background-color: #3182ce;
-  background-color: rgba(49, 130, 206, var(--bg-opacity));
+  background-color: rgba(147, 51, 234, var(--bg-opacity));
 }
 
 .price {
@@ -1464,15 +1460,11 @@ p {
 .pricing-list ul li {
   margin-bottom: 1rem;
   --text-opacity: 1;
-  color: #1a202c;
-  color: rgba(26, 32, 44, var(--text-opacity));
 }
 
 .pricing-list ul li i {
   margin-right: 0.75rem;
   --text-opacity: 1;
-  color: #3182ce;
-  color: rgba(49, 130, 206, var(--text-opacity));
 }
 
 .main-btn {
@@ -1683,8 +1675,7 @@ p {
   color: rgba(255, 255, 255, var(--text-opacity));
   transition-duration: 300ms;
   --bg-opacity: 1;
-  background-color: #3182ce;
-  background-color: rgba(49, 130, 206, var(--bg-opacity));
+  background-color: rgba(147, 51, 234, var(--bg-opacity));
   border-radius: 0.25rem;
 }
 

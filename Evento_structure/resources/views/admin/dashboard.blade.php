@@ -19,66 +19,47 @@
       <div>
         <div class="text-white">
           <div class="flex p-5 bg-gray-800">
-            <img class="h-9" src="{{asset('img/WebSiteName-removebg-preview.png')}}">
+            <img class="h-9 mx-auto " src="{{asset('images/webSiteName.png')}}">
           </div>
           <div class="flex justify-center">
-            <div class="">
-              <img class="hidden h-24 w-24 rounded-full sm:block object-cover mr-2 border-4 border-red-600" src="https://image.flaticon.com/icons/png/512/149/149071.png" alt="">
+            <div class=" ">
+              <img class="hidden h-24 w-24 rounded-full sm:block object-cover mr-2 border-4 border-purple-600" src="{{asset('images/admin.png')}}" alt="">
               <p class="font-bold text-base  text-gray-400 pt-2 text-center w-24">Mr. {{ Auth::user()->name }}</p>
             </div>
           </div>
           <div>
             <ul class="mt-6 leading-10">
               <li class="relative px-2 py-1 ">
-                <a class="inline-flex items-center w-full text-sm font-semibold text-white transition-colors duration-150 cursor-pointer hover:text-red-600" href=" #">
+                <a href="{{route('admin.statistics')}}" class="inline-flex items-center w-full text-sm font-semibold text-white transition-colors duration-150 cursor-pointer hover:text-purple-600">
                   <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
                   </svg>
-                  <span class="ml-4">DASHBOARD</span>
+                  <span class="ml-4">Statistics</span>
                 </a>
               </li>
-              <li class="relative px-2 py-1" x-data="{ Open : false  }">
-                <div class="inline-flex items-center justify-between w-full text-base font-semibold transition-colors duration-150 text-gray-500  hover:text-yellow-400 cursor-pointer" x-on:click="Open = !Open">
-                  <span class="inline-flex items-center  text-sm font-semibold text-white hover:text-red-600">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 4H6a2 2 0 00-2 2v12a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-2m-4-1v8m0 0l3-3m-3 3L9 8m-5 5h2.586a1 1 0 01.707.293l2.414 2.414a1 1 0 00.707.293h3.172a1 1 0 00.707-.293l2.414-2.414a1 1 0 01.707-.293H20" />
-                    </svg>
-                    <span class="ml-4">ITEM</span>
-                  </span>
-                  <svg xmlns="http://www.w3.org/2000/svg" x-show="!Open" class="ml-1  text-white w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="display: none;">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+              <li class="relative px-2 py-1 ">
+                <a href="{{route('admin.index')}}" class="inline-flex items-center w-full text-sm font-semibold text-white transition-colors duration-150 cursor-pointer hover:text-purple-600">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
                   </svg>
-
-                  <svg xmlns="http://www.w3.org/2000/svg" x-show="Open" class="ml-1  text-white w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="display: none;">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                  <span class="ml-4">Categories</span>
+                </a>
+              </li>
+              <li class="relative px-2 py-1 ">
+                <a href="{{route('admin.users')}}" class="inline-flex items-center w-full text-sm font-semibold text-white transition-colors duration-150 cursor-pointer hover:text-purple-600">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
                   </svg>
-                </div>
-
-                <div x-show.transition="Open" style="display:none;">
-                  <ul x-transition:enter="transition-all ease-in-out duration-300" x-transition:enter-start="opacity-25 max-h-0" x-transition:enter-end="opacity-100 max-h-xl" x-transition:leave="transition-all ease-in-out duration-300" x-transition:leave-start="opacity-100 max-h-xl" x-transition:leave-end="opacity-0 max-h-0" class="p-2 mt-2 space-y-2 overflow-hidden text-sm font-medium  rounded-md shadow-inner  bg-red-600" aria-label="submenu">
-
-                    <li class="px-2 py-1 text-white transition-colors duration-150">
-                      <div class="px-1 hover:text-gray-800 hover:bg-gray-100 rounded-md">
-                        <div class="flex items-center">
-                          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-                          </svg>
-                          <a href="{{ route('admin.users') }}" class="w-full ml-2  text-sm font-semibold text-white hover:text-gray-800">Users</a>
-                        </div>
-                      </div>
-                    </li>
-                    <li class="px-2 py-1 text-white transition-colors duration-150">
-                      <div class="px-1 hover:text-gray-800 hover:bg-gray-100 rounded-md">
-                        <div class="flex items-center">
-                          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-                          </svg>
-                          <a href="{{ route('admin.requests') }}" class="w-full ml-2  text-sm font-semibold text-white hover:text-gray-800">Event Requests</a>
-                        </div>
-                      </div>
-                    </li>
-                  </ul>
-                </div>
+                  <span class="ml-4">Users</span>
+                </a>
+              </li>
+              <li class="relative px-2 py-1 ">
+                <a href="{{route('admin.requests')}}" class="inline-flex items-center w-full text-sm font-semibold text-white transition-colors duration-150 cursor-pointer hover:text-purple-600">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                  </svg>
+                  <span class="ml-4">Requests</span>
+                </a>
               </li>
             </ul>
           </div>
@@ -101,7 +82,7 @@
           <div>
             <ul class="mt-6 leading-10">
               <li class="relative px-2 py-1 ">
-                <a class="inline-flex items-center w-full text-sm font-semibold text-white transition-colors duration-150 cursor-pointer hover:text-red-600" href=" #">
+                <a class="inline-flex items-center w-full text-sm font-semibold text-white transition-colors duration-150 cursor-pointer hover:text-purple-600" href=" #">
                   <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
                   </svg>
@@ -110,7 +91,7 @@
               </li>
               <li class="relative px-2 py-1" x-data="{ Open : false  }">
                 <div class="inline-flex items-center justify-between w-full text-base font-semibold transition-colors duration-150 text-gray-500  hover:text-yellow-400 cursor-pointer" x-on:click="Open = !Open">
-                  <span class="inline-flex items-center  text-sm font-semibold text-white hover:text-red-600">
+                  <span class="inline-flex items-center  text-sm font-semibold text-white hover:text-purple-600">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 4H6a2 2 0 00-2 2v12a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-2m-4-1v8m0 0l3-3m-3 3L9 8m-5 5h2.586a1 1 0 01.707.293l2.414 2.414a1 1 0 00.707.293h3.172a1 1 0 00.707-.293l2.414-2.414a1 1 0 01.707-.293H20" />
                     </svg>
@@ -126,7 +107,7 @@
                 </div>
 
                 <div x-show.transition="Open" style="display:none;">
-                  <ul x-transition:enter="transition-all ease-in-out duration-300" x-transition:enter-start="opacity-25 max-h-0" x-transition:enter-end="opacity-100 max-h-xl" x-transition:leave="transition-all ease-in-out duration-300" x-transition:leave-start="opacity-100 max-h-xl" x-transition:leave-end="opacity-0 max-h-0" class="p-2 mt-2 space-y-2 overflow-hidden text-sm font-medium  rounded-md shadow-inner  bg-red-600" aria-label="submenu">
+                  <ul x-transition:enter="transition-all ease-in-out duration-300" x-transition:enter-start="opacity-25 max-h-0" x-transition:enter-end="opacity-100 max-h-xl" x-transition:leave="transition-all ease-in-out duration-300" x-transition:leave-start="opacity-100 max-h-xl" x-transition:leave-end="opacity-0 max-h-0" class="p-2 mt-2 space-y-2 overflow-hidden text-sm font-medium  rounded-md shadow-inner  bg-purple-600" aria-label="submenu">
                     <li class="px-2 py-1 text-white transition-colors duration-150">
                       <div class="px-1 hover:text-gray-800 hover:bg-gray-100 rounded-md">
                         <div class="flex items-center">
@@ -157,10 +138,10 @@
             </svg>
           </button>
 
-          <ul class="flex items-center flex-shrink-0 space-x-6">
+          <ul class="flex items-center justify-end w-full flex-shrink-0 space-x-6 ">
             <!-- Profile menu -->
             <li class="relative">
-              <button class="p-2 bg-white text-red-600 align-middle rounded-full hover:text-white hover:bg-red-600 focus:outline-none " @click="toggleProfileMenu" @keydown.escape="closeProfileMenu" aria-label="Account" aria-haspopup="true">
+              <button class="p-2 bg-white text-purple-600 align-middle rounded-full hover:text-white hover:bg-purple-600 focus:outline-none " @click="toggleProfileMenu" @keydown.escape="closeProfileMenu" aria-label="Account" aria-haspopup="true">
                 <div class="flex items-center">
                   <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
@@ -169,22 +150,25 @@
                 </div>
               </button>
               <template x-if="isProfileMenuOpen">
-                <ul x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" @click.away="closeProfileMenu" @keydown.escape="closeProfileMenu" class="absolute right-0 w-56 p-2 mt-2 space-y-2 text-gray-600 bg-red-500 border border-red-600 rounded-md shadow-md" aria-label="submenu">
-                  <li class="flex">
+                <ul x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" @click.away="closeProfileMenu" @keydown.escape="closeProfileMenu" class="absolute right-0 w-56 p-2 mt-2 space-y-2 text-gray-600 bg-purple-500 border border-purple-600 rounded-md shadow-md" aria-label="submenu">
+                  <!-- <li class="flex">
                     <a class=" text-white inline-flex items-center w-full px-2 py-1 text-sm font-semibold transition-colors duration-150 rounded-md hover:bg-gray-100 hover:text-gray-800" href="#">
                       <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                       </svg>
                       <span>Profile</span>
                     </a>
-                  </li>
+                  </li> -->
                   <li class="flex">
-                    <a class="text-white inline-flex items-center w-full px-2 py-1 text-sm font-semibold transition-colors duration-150 rounded-md hover:bg-gray-100 hover:text-gray-800" href="#">
-                      <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
-                      </svg>
-                      <span>Log out</span>
-                    </a>
+                    <form method="POST" action="{{ route('logout') }}" class="w-full">
+                      @csrf
+                      <button class="text-white inline-flex items-center w-full px-2 py-1 text-sm font-semibold transition-colors duration-150 rounded-md hover:bg-gray-100 hover:text-gray-800" href="#">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                        </svg>
+                        <span>Log out</span>
+                      </button>
+                    </form>
                   </li>
                 </ul>
               </template>
@@ -193,16 +177,16 @@
         </div>
       </header>
       <main class="">
-        <div class="grid h-screen mb-4 pb-10 px-8 mx-4 rounded-3xl bg-gray-100 border-4 border-red-600">
+        <div class="grid h-screen mb-4 pb-10 px-8 mx-4 rounded-3xl bg-gray-100 border-4 border-purple-600">
           <div class="grid grid-cols-12 gap-6">
             <div class="grid grid-cols-12 col-span-12 gap-6 xxl:col-span-9">
               <div class="col-span-12 mt-5">
                 <div class="grid gap-2 grid-cols-1 lg:grid-cols-1">
                   <div class="bg-white p-4 shadow-lg rounded-lg">
                     <div class="flex justify-between">
-                      <h1 class="font-bold text-base">Categories</h1>
+                      <h1 class="font-bold text-base text-purple-600">Categories</h1>
                       <button data-modal-target="authentication-modal" data-modal-toggle="authentication-modal" class="" type="button">
-                        <i class="fa-solid fa-circle-plus fa-lg text-red-600 hover:text-green-600 transition-all ease-in"></i>
+                        <i class="fa-solid fa-circle-plus fa-lg text-purple-600 hover:text-purple-600 transition-all ease-in"></i>
                       </button>
 
                       <!-- Main modal -->
@@ -230,7 +214,7 @@
                                 <div>
                                   <label for="CategoryName" class="block mb-2 text-sm font-medium text-gray-900 ">Category Name</label>
                                   <input type="text" name="CategoryName" id="CategoryName" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="exp: Aspirin" required>
-                                </div>                                
+                                </div>
                                 <button type="submit" class="w-full text-white bg-blue-500 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center ">Add</button>
                               </form>
                             </div>
@@ -255,7 +239,7 @@
                                       <div class="flex cursor-pointer">
                                         <span class="mr-2">Category Name</span>
                                       </div>
-                                    </th>                            
+                                    </th>
                                     <th class="px-6 py-3 bg-gray-50 text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
                                       <div class="flex cursor-pointer">
                                         <span class="mr-2">Action</span>
@@ -271,7 +255,7 @@
                                     </td>
                                     <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5">
                                       <p>{{$category->name}}</p>
-                                    </td>                                   
+                                    </td>
                                     <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5">
                                       <div class="flex space-x-4">
                                         <a data-modal-target="authentication-modal-{{ $category->id }}" data-modal-toggle="authentication-modal-{{ $category->id }}" type="button" class="cursor-pointer text-blue-500 hover:text-blue-600">
@@ -302,7 +286,7 @@
                                                   <div>
                                                     <label for="CategoryName" class="block mb-2 text-sm font-medium text-gray-900 ">New Category Name</label>
                                                     <input type="text" name="CategoryName" id="CategoryName" value="{{ $category->name }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required>
-                                                  </div>                                                  
+                                                  </div>
                                                   <button type="submit" class="w-full text-white bg-blue-500 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center ">Edit</button>
                                                 </form>
                                               </div>
@@ -331,7 +315,7 @@
                                                   <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                                                 </svg>
                                                 <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Are you sure you want to archive this Category?</h3>
-                                                <button data-modal-hide="popup-modal{{$category->id}}" type="submit" class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center me-2">
+                                                <button data-modal-hide="popup-modal{{$category->id}}" type="submit" class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center me-2">
                                                   Yes, I'm sure
                                                 </button>
                                                 <button data-modal-hide="popup-modal{{$category->id}}" type="button" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">No, cancel</button>

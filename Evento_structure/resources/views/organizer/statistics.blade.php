@@ -14,6 +14,7 @@
 
 <body>
   <div class="flex h-screen bg-gray-800 " :class="{ 'overflow-hidden': isSideMenuOpen }">
+
     <!-- Desktop sidebar -->
     <aside class="z-20 flex-shrink-0 hidden w-60 pl-2 overflow-y-auto bg-gray-800 md:block">
       <div>
@@ -30,7 +31,7 @@
           <div>
             <ul class="mt-6 leading-10">
               <li class="relative px-2 py-1 ">
-                <a href="{{route('organizer.index')}}" class="inline-flex items-center w-full text-sm font-semibold text-white transition-colors duration-150 cursor-pointer hover:text-purple-600">
+                <a href="{{ route('organizer.index') }}" class="inline-flex items-center w-full text-sm font-semibold text-white transition-colors duration-150 cursor-pointer hover:text-purple-600">
                   <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
                   </svg>
@@ -38,7 +39,7 @@
                 </a>
               </li>
               <li class="relative px-2 py-1" x-data="{ Open : false  }">
-                <a href="{{ route('organizer.statistics') }}" class="inline-flex items-center justify-between w-full text-base font-semibold transition-colors duration-150 text-gray-500  hover:text-yellow-400 cursor-pointer">
+                <a href="#" class="inline-flex items-center justify-between w-full text-base font-semibold transition-colors duration-150 text-gray-500  hover:text-yellow-400 cursor-pointer">
                   <span class="inline-flex items-center  text-sm font-semibold text-white hover:text-purple-600">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 4H6a2 2 0 00-2 2v12a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-2m-4-1v8m0 0l3-3m-3 3L9 8m-5 5h2.586a1 1 0 01.707.293l2.414 2.414a1 1 0 00.707.293h3.172a1 1 0 00.707-.293l2.414-2.414a1 1 0 01.707-.293H20" />
@@ -163,100 +164,44 @@
         </div>
       </header>
       <main class="">
-        <div class="flex flex-wrap h-auto mb-4 pb-10 px-8 mx-4 rounded-3xl bg-gray-100 border-4 border-purple-600">
-          <div class="w-full flex justify-center mt-10 mb-5">
-            <h2 class="text-3xl font-bold text-purple-600 capitalize">Modifying Event</h2>
+        <div class="h-screen mb-4 p-20 mx-4 rounded-3xl bg-gray-100 border-4 border-purple-600">
+          <div class="w-full flex justify-between mb-16">
+            <h2 class="text-3xl font-bold text-purple-600">Statistics</h2>
           </div>
-          <form class="w-full" method="post" action="{{ route('event.update', ['event' => $event]) }}">
-            @csrf
-            @method('PUT')
-            <div class="flex flex-wrap -mx-3 mb-6">
-              <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
-                  title
-                </label>
-                <input name="title" value="{{ $event->title }}" class="appearance-none block w-full bg-purple-300 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-first-name" type="text">
-              </div>
-              <div class="w-full md:w-1/2 px-3">
-                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">
-                  venue
-                </label>
-                <input name="venue" value="{{ $event->venue }}" class="appearance-none block w-full bg-purple-300 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-last-name" type="text">
-              </div>
-              <div class="w-full px-3">
-                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">
-                  Available places
-                </label>
-                <input name="availablePlaces" value="{{ $event->availablePlaces }}" class="appearance-none block w-full bg-purple-300 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-last-name" type="text">
-              </div>
-            </div>
-            <div class="flex flex-wrap -mx-3 mb-6">
-              <div class="w-full px-3">
-                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-password">
-                  description
-                </label>
-                <textarea name="description" class="appearance-none block w-full bg-purple-300 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-password" rows="4">{{ $event->description }}</textarea>
-                <p class="text-gray-600 text-xs italic">Make it as long and as crazy as you'd like</p>
-              </div>
-            </div>
-            <div class="flex flex-wrap -mx-3 mb-2">
-              <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-city">
-                  date
-                </label>
-                <input name="date" class="appearance-none block w-full bg-purple-300 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-city" type="date" placeholder="Albuquerque">
-              </div>
-              <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-state">
-                  Validation Type
-                </label>
-                <div class="relative">
-                  <select name="validationType" class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-state">
-                    @if($event->validationType == 'automatic')
-                    <option selected value="automatic">Auto</option>
-                    <option value="manual">Manual</option>
-                    @else
-                    <option value="automatic">Auto</option>
-                    <option selected value="manual">Manual</option>
-                    @endif
-                  </select>
-                  <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-                    <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                      <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+          <div class="flex w-full flex-wrap justify-center gap-10">
+            <div class="relative flex flex-grow !flex-row flex-col items-center rounded-[10px] rounded-[10px] border-[1px] border-gray-200 bg-white bg-clip-border shadow-md shadow-[#F3F3F3] dark:border-[#ffffff33] dark:!bg-navy-800 dark:text-white dark:shadow-none">
+              <div class="ml-[18px] flex h-[100px] w-auto flex-row items-center">
+                <div class="rounded-full bg-lightPrimary p-3 dark:bg-navy-700">
+                  <span class="flex items-center text-brand-500 dark:text-white">
+                    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" class="h-7 w-7 text-purple-600" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+                      <path fill="none" d="M0 0h24v24H0z"></path>
+                      <path d="M4 9h4v11H4zM16 13h4v7h-4zM10 4h4v16h-4z"></path>
                     </svg>
-                  </div>
+                  </span>
                 </div>
               </div>
-              <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-zip">
-                  Category
-                </label>
-                <div class="relative">
-                  <select name="category" class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-state">
-                    @foreach($categories as $category)
-                    @if($event->categoryID == $category->id)
-                    <option selected value="{{$category->id}}">{{$category->name}}</option>
-                    @else
-                    <option value="{{$category->id}}">{{$category->name}}</option>
-                    @endif
-                    @endforeach
-                  </select>
-                  <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-                    <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                      <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+              <div class="h-50 ml-4 flex w-auto flex-col justify-center">
+                <p class="font-dm text-sm font-medium text-gray-600">Total Events</p>
+                <h4 class="text-xl font-bold text-navy-700 dark:text-white">{{$eventCount}} events</h4>
+              </div>
+            </div>
+            <div class="relative flex flex-grow !flex-row flex-col items-center rounded-[10px] rounded-[10px] border-[1px] border-gray-200 bg-white bg-clip-border shadow-md shadow-[#F3F3F3] dark:border-[#ffffff33] dark:!bg-navy-800 dark:text-white dark:shadow-none">
+              <div class="ml-[18px] flex h-[100px] w-auto flex-row items-center">
+                <div class="rounded-full bg-lightPrimary p-3 dark:bg-navy-700">
+                  <span class="flex items-center text-brand-500 dark:text-white">
+                    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" class="h-7 w-7 text-purple-600" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+                      <path fill="none" d="M0 0h24v24H0z"></path>
+                      <path d="M4 9h4v11H4zM16 13h4v7h-4zM10 4h4v16h-4z"></path>
                     </svg>
-                  </div>
+                  </span>
                 </div>
               </div>
-              <input type="hidden" name="organizerID" value="{{ Auth::user()->organizers->id }}">
+              <div class="h-50 ml-4 flex w-auto flex-col justify-center">
+                <p class="font-dm text-sm font-medium text-gray-600">Total Events</p>
+                <h4 class="text-xl font-bold text-navy-700 dark:text-white">{{$eventCount}} events</h4>
+              </div>
             </div>
-            <button class="inline-flex items-center justify-center px-5 py-3 mt-5 text-base font-medium text-center text-purple-100 border border-purple-500 rounded-lg shadow-sm cursor-pointer hover:text-white bg-gradient-to-br from-purple-500 via-indigo-500 to-indigo-500">
-              <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-              </svg>
-              <span class="relative capitalize">modify event</span>
-            </button>
-          </form>
+          </div>
         </div>
       </main>
     </div>

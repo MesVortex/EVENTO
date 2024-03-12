@@ -54,6 +54,5 @@ class RegisteredUserController extends Controller
 
         return $request->role == 'client' ? redirect('/client/landingPage') : redirect('/organizer/dashboard');
 
-        // return redirect(RouteServiceProvider::HOME);
     }
 }

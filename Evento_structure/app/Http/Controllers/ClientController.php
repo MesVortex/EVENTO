@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Client;
 use App\Models\Event;
+use App\Models\Reservation;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ClientController extends Controller
 {
@@ -15,6 +17,17 @@ class ClientController extends Controller
     {
         $events = Event::with('organizers','categories')->where('adminValidation', 'accepted')->limit(3)->get();
         return view('client.landingPage', compact('events'));
+    }
+
+    public function ticket(Reservation $reservation){
+        return view('client.ticket', compact('reservation'));
+    }
+
+    public function clientReservations()
+    {
+        $userID = Auth::user()->clients->id;
+        $reservations = Reservation::where('clientID', $userID)->orderBy('isAcceptedByOrganizer', 'DESC')->get();
+        return view('client.reservations', compact('reservations'));
     }
 
     /**

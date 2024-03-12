@@ -13,7 +13,7 @@
     <title>Evento</title>
 
     <!--====== Favicon Icon ======-->
-    <link rel="shortcut icon" href="{{asset('images/EventoLogoTop.png')}}" type="image/png">
+    <link rel="shortcut icon" href="{{asset('images/Logo_no_bg.png')}}" type="image/png">
 
     <!--====== Slick css ======-->
     <link rel="stylesheet" href="{{asset('css/slick.css')}}">
@@ -26,6 +26,14 @@
 
     <!--====== tailwind css ======-->
     <link rel="stylesheet" href="{{asset('css/tailwind.css')}}">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js"></script>
+
+    <script src="https://unpkg.com/tailwindcss-jit-cdn"></script>
 
 
 </head>
@@ -58,28 +66,62 @@
                                         <a class="page-scroll" href="#home">HOME</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="page-scroll" href="#service">SERVICES</a>
+                                        <a class="page-scroll" href="#pricing">Events</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="page-scroll" href="#pricing">PRICING</a>
+                                        <a class="page-scroll" href="{{route('event.explore')}}">Explore</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="page-scroll" href="#testimonial">Testimonial</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="page-scroll" href="#contact">CONTACT</a>
+                                        <a class="page-scroll" href="{{ route('client.reservations') }}">Your Reservations</a>
                                     </li>
                                 </ul>
                             </div>
 
                             <div class="items-center justify-end hidden navbar-social lg:flex">
-                                <span class="mr-4 font-bold text-gray-900 uppercase">FOLLOW US</span>
-                                <ul class="flex footer-social">
-                                    <li><a href="#"><i class="lni-facebook-filled"></i></a></li>
-                                    <li><a href="#"><i class="lni-twitter-original"></i></a></li>
-                                    <li><a href="#"><i class="lni-instagram-original"></i></a></li>
-                                    <li><a href="#"><i class="lni-linkedin-original"></i></a></li>
-                                </ul>
+                                <form method="get" action="{{ route('event.search') }}" class=" mr-6 relative mx-auto text-gray-600">
+                                    @csrf
+                                    @method('GET')
+                                    <input class="border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none" type="search" name="search" placeholder="Search">
+                                    <button type="submit" class="absolute right-0 top-0 mt-3 mr-4">
+                                        <svg class="text-gray-600 h-4 w-4 fill-current" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px" viewBox="0 0 56.966 56.966" style="enable-background:new 0 0 56.966 56.966;" xml:space="preserve" width="512px" height="512px">
+                                            <path d="M55.146,51.887L41.588,37.786c3.486-4.144,5.396-9.358,5.396-14.786c0-12.682-10.318-23-23-23s-23,10.318-23,23  s10.318,23,23,23c4.761,0,9.298-1.436,13.177-4.162l13.661,14.208c0.571,0.593,1.339,0.92,2.162,0.92  c0.779,0,1.518-0.297,2.079-0.837C56.255,54.982,56.293,53.08,55.146,51.887z M23.984,6c9.374,0,17,7.626,17,17s-7.626,17-17,17  s-17-7.626-17-17S14.61,6,23.984,6z" />
+                                        </svg>
+                                    </button>
+                                </form>
+                                <div class="bg-transparent flex justify-center items-center dark:bg-gray-500">
+                                    <div x-data="{ open: false }" class="bg-transparent dark:bg-gray-800 flex justify-center items-center">
+                                        <div @click="open = !open" class="relative border-b-4 border-transparent py-3" :class="{'border-indigo-700 transform transition duration-300 ': open}" x-transition:enter-end="transform opacity-100 scale-100" x-transition:leave="transition ease-in duration-75" x-transition:leave-start="transform opacity-100 scale-100">
+                                            <div class="flex justify-center items-center space-x-3 cursor-pointer">
+                                                <div class="w-12 h-12 rounded-full overflow-hidden border-2 dark:border-white border-gray-900">
+                                                    <img src="https://images.unsplash.com/photo-1610397095767-84a5b4736cbd?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80" alt="" class="w-full h-full object-cover">
+                                                </div>
+                                            </div>
+                                            <div x-show="open" x-transition:enter="transition ease-out duration-100" x-transition:enter-start="transform opacity-0 scale-95" x-transition:enter-end="transform opacity-100 scale-100" x-transition:leave="transition ease-in duration-75" x-transition:leave-start="transform opacity-100 scale-100" x-transition:leave-end="transform opacity-0 scale-95" class="absolute w-60 px-5 py-3 dark:bg-gray-800 bg-white rounded-lg shadow border dark:border-transparent mt-5" style="right: 0px;">
+                                                <ul class="space-y-3 dark:text-white">
+                                                    <li class="font-medium">
+                                                        <div class="font-semibold dark:text-white text-gray-900 text-lg">
+                                                            <div class="cursor-pointer capitalize">Mr. {{Auth::user()->name}}</div>
+                                                        </div>
+                                                    </li>
+                                                    <hr class="dark:border-gray-700">
+                                                    <li class="font-medium">
+                                                        <form method="POST" action="{{ route('logout') }}" class="flex items-center transform transition-colors duration-200 border-r-4 border-transparent hover:border-red-600">
+                                                            @csrf
+                                                            <button class="flex">
+                                                                <div class="mr-3 text-red-600">
+                                                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path>
+                                                                    </svg>
+                                                                </div>
+                                                                Logout
+                                                            </button>
+                                                        </form>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </nav> <!-- navbar -->
                     </div>
@@ -92,12 +134,8 @@
                 <div class="justify-center row">
                     <div class="w-full lg:w-5/6 xl:w-2/3">
                         <div class="pt-48 pb-64 text-center header-content">
-                            <h3 class="mb-5 text-3xl font-semibold leading-tight text-gray-900 md:text-5xl"></h3>
-                            <p class="px-5 mb-10 text-xl text-gray-700"></p>
-                            <ul class="flex flex-wrap justify-center">
-                                <li><a class="mx-3 main-btn gradient-btn" href="javascript:void(0)">GET IN TOUCH</a></li>
-                                <li><a class="mx-3 main-btn video-popup" href="https://www.youtube.com/watch?v=r44RKWyfcFw">WATCH THE VIDEO <i class="ml-2 lni-play"></i></a></li>
-                            </ul>
+                            <h1 class="mb-4 text-3xl font-extrabold text-white dark:text-white md:text-5xl lg:text-6xl"><span class="text-transparent bg-clip-text bg-gradient-to-r to-indigo-600 from-purple-400">Evento:</span> booking done right.</h1>
+                            <p class="text-lg font-normal text-gray-300 lg:text-xl dark:text-gray-300 capitalize">The biggest event booking plateform.</p>
                         </div> <!-- header content -->
                     </div>
                 </div> <!-- row -->
@@ -118,7 +156,7 @@
                 <div class="w-full mx-4 lg:w-1/2">
                     <div class="pb-10 section-title">
                         <h4 class="title">Crafted For</h4>
-                        <p class="text">Stop wasting time and money designing and managing a website that doesn’t get results. Happiness guaranteed!</p>
+                        <p class="text">Stop wasting time and money managing event bookings that don't deliver results. Satisfaction guaranteed!</p>
                     </div> <!-- section title -->
                 </div>
             </div> <!-- row -->
@@ -128,44 +166,44 @@
                         <div class="w-full md:w-1/2">
                             <div class="block mx-4 services-content sm:flex">
                                 <div class="services-icon">
-                                    <i class="lni-bolt"></i>
+                                    <i class="fas fa-users"></i>
                                 </div>
                                 <div class="mb-8 ml-0 services-content media-body sm:ml-3">
-                                    <h4 class="services-title">Startup</h4>
-                                    <p class="text">Short description for the ones who look for something new.</p>
+                                    <h4 class="services-title">Event Organizers</h4>
+                                    <p class="text">Tailored for event organizers seeking an intuitive platform to efficiently manage event reservations and attendee experiences.</p>
                                 </div>
                             </div> <!-- services content -->
                         </div>
                         <div class="w-full md:w-1/2">
                             <div class="block mx-4 services-content sm:flex">
                                 <div class="services-icon">
-                                    <i class="lni-bar-chart"></i>
+                                    <i class="fas fa-ticket-alt"></i>
                                 </div>
                                 <div class="mb-8 ml-0 services-content media-body sm:ml-3">
-                                    <h4 class="services-title">SaaS Business</h4>
-                                    <p class="text">Short description for the ones who look for something new.</p>
+                                    <h4 class="services-title">Event Enthusiasts</h4>
+                                    <p class="text">Ideal for individuals passionate about attending events, providing a seamless experience to discover and book tickets for a variety of occasions.</p>
                                 </div>
                             </div> <!-- services content -->
                         </div>
                         <div class="w-full md:w-1/2">
                             <div class="block mx-4 services-content sm:flex">
                                 <div class="services-icon">
-                                    <i class="lni-brush"></i>
+                                    <i class="fas fa-building"></i>
                                 </div>
                                 <div class="mb-8 ml-0 services-content media-body sm:ml-3">
                                     <h4 class="services-title">Agency</h4>
-                                    <p class="text">Short description for the ones who look for something new.</p>
+                                    <p class="text">Perfect for event management agencies seeking a comprehensive solution to manage events efficiently and effortlessly.</p>
                                 </div>
                             </div> <!-- services content -->
                         </div>
                         <div class="w-full md:w-1/2">
                             <div class="block mx-4 services-content sm:flex">
                                 <div class="services-icon">
-                                    <i class="lni-bulb"></i>
+                                    <i class="fas fa-mobile-alt"></i>
                                 </div>
                                 <div class="mb-8 ml-0 services-content media-body sm:ml-3">
                                     <h4 class="services-title">App Landing</h4>
-                                    <p class="text">Short description for the ones who look for something new.</p>
+                                    <p class="text">Designed for individuals and businesses looking for a user-friendly platform to explore, book, and manage a variety of events.</p>
                                 </div>
                             </div> <!-- services content -->
                         </div>
@@ -175,7 +213,7 @@
         </div> <!-- container -->
         <div class="services-image">
             <div class="image">
-                <img src="{{asset('images/services.png')}}" alt="Services">
+                <img src="{{asset('images/carfedFor.jpg')}}" alt="Services">
             </div>
         </div> <!-- services image -->
     </section>
@@ -189,11 +227,12 @@
             <div class="justify-center row">
                 <div class="w-full mx-4 lg:w-1/2">
                     <div class="pb-10 text-center section-title">
-                        <h4 class="title">Our Pricing</h4>
-                        <p class="text">Stop wasting time and money designing and managing a website that doesn’t get results. Happiness guaranteed!</p>
+                        <h4 class="title">Latest Events</h4>
+                        <p class="text">Explore What's Happening Now!</p>
                     </div> <!-- section title -->
                 </div>
-            </div> <!-- row -->
+            </div>
+            <!-- row -->
             <div class="justify-center row">
                 @foreach($events as $event)
                 <div class="w-full sm:w-3/4 md:w-3/4 lg:w-1/3">
@@ -204,25 +243,27 @@
                         <div class="pricing-header">
                             <h5 class="sub-title">{{ $event->categories->name }}</h5>
                             <span class="price">{{ $event->title }}</span>
-                            <p class="year">{{ $event->venue }}</p>
+                            <p class="year">By {{ $event->organizers->users->name }}</p>
                         </div>
                         <div class="mb-8 pricing-list">
                             <ul>
-                                <li><i class="lni-check-mark-circle"></i> Carefully crafted components</li>
-                                <li><i class="lni-check-mark-circle"></i> Amazing page examples</li>
-                                <li><i class="lni-check-mark-circle"></i> Super friendly support team</li>
-                                <li><i class="lni-check-mark-circle"></i> Awesome Support</li>
+                                <li><i class="fa-solid fa-map-pin text-purple-600"></i><span class=" font-bold">Happening At</span> <span class="italic text-gray-600">{{ $event->venue }}</span> </li>
+                                <li><i class="fa-solid fa-ticket text-purple-600"></i><span class="font-bold">Available Tickets:</span> <span class="italic text-gray-600">{{ $event->availablePlaces }}</span></li>
+                                <li><i class="fa-regular fa-calendar-days text-purple-600"></i><span class="font-bold">Special Day:</span> <span class="italic text-gray-600">{{ $event->date }}</span></li>
                             </ul>
                         </div>
                         <div class="text-center pricing-btn">
-                            <a class="main-btn" href="{{ route('event.clientShow', $event) }}">Read More</a>
+                            <a href="{{ route('event.clientShow', $event) }}" class="relative inline-flex items-center justify-start px-6 py-3 overflow-hidden font-medium transition-all bg-white rounded hover:bg-white group">
+                                <span class="w-48 h-48 rounded rotate-[-40deg] bg-purple-600 absolute bottom-0 left-0 -translate-x-full ease-out duration-500 transition-all translate-y-full mb-9 ml-9 group-hover:ml-0 group-hover:mb-32 group-hover:translate-x-0"></span>
+                                <span class="relative w-full text-left text-black transition-colors duration-300 ease-in-out group-hover:text-white">Read More</span>
+                            </a>
                         </div>
                         <div class="bottom-shape">
                             <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 350 112.35">
                                 <defs>
                                     <style>
                                         .color-2 {
-                                            fill: #0067f4;
+                                            fill: rgb(147 51 234);
                                             isolation: isolate;
                                         }
 
@@ -260,226 +301,25 @@
             </div> <!-- row -->
         </div>
         <!-- container -->
-        <div class="flex flex-wrap justify-center">
-            <a class="mx-3 main-btn gradient-btn" href="{{route('event.explore')}}">Explore</a>
+        <div class="flex flex-wrap justify-center mt-10">
+            <a href="{{route('event.explore')}}" class="relative w-40 inline-flex items-center justify-center p-4 px-6 py-3 overflow-hidden font-medium text-purple-600 transition duration-300 ease-out border-2 border-purple-500 rounded-full shadow-md group">
+                <span class="absolute inset-0 flex items-center justify-center w-full h-full text-white duration-300 -translate-x-full bg-purple-600 group-hover:translate-x-0 ease">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                    </svg>
+                </span>
+                <span class="absolute flex items-center justify-center w-full h-full text-purple-500 transition-all duration-300 transform group-hover:translate-x-full ease">Explore</span>
+                <span class="relative invisible">Explore</span>
+            </a>
         </div>
     </section>
     <!--====== PRICING PART ENDS ======-->
 
-    <!--====== CALL TO ACTION PART START ======-->
-
-    <section id="call-to-action" class="relative overflow-hidden bg-blue-600 call-to-action">
-        <div class="absolute top-0 left-0 w-1/2 h-full call-action-image">
-            <img src="{{asset('images/call-to-action.png')}}" alt="call-to-action">
-        </div>
-
-        <div class="container-fluid">
-            <div class="justify-end row">
-                <div class="w-full lg:w-1/2">
-                    <div class="py-32 mx-auto text-center call-action-content">
-                        <h2 class="mb-5 text-5xl font-semibold leading-tight text-white">Curious to Learn More? Stay Tuned</h2>
-                        <p class="mb-6 text-white">You let us know whenever you want us to update anything or think something can be optimized.</p>
-                        <form action="#" class="relative w-5/6 mx-auto md:w-2/3 call-newsletter">
-                            <i class="absolute top-0 left-0 pt-3 pl-5 text-xl text-blue-600 lni-envelope"></i>
-                            <input type="email" placeholder="john@email.com" class="w-full py-3 pl-12 pr-40 bg-white rounded-full focus:outline-none">
-                            <button type="submit" class="absolute top-0 right-0 px-6 py-2 mt-1 mr-1 font-bold text-white duration-300 bg-blue-600 rounded-full hover:bg-blue-500">SUBSCRIBE</button>
-                        </form>
-                    </div> <!-- slider-content -->
-                </div>
-            </div> <!-- row -->
-        </div> <!-- container -->
-    </section>
-
-    <!--====== CALL TO ACTION PART ENDS ======-->
-
-    <!--====== TESTIMONIAL THREE PART START ======-->
-
-    <section id="testimonial" class="testimonial-area py-120">
-        <div class="container">
-            <div class="justify-center row">
-                <div class="w-full mx-4 lg:w-1/2">
-                    <div class="pb-10 text-center section-title">
-                        <h4 class="title">Testimonial</h4>
-                        <p class="text">Stop wasting time and money designing and managing a website that doesn’t get results. Happiness guaranteed!</p>
-                    </div> <!-- section title -->
-                </div>
-            </div> <!-- row -->
-
-            <div class="row">
-                <div class="w-full">
-                    <div class="row testimonial-active">
-                        <div class="w-full lg:w-1/3">
-                            <div class="text-center single-testimonial">
-                                <div class="testimonial-image">
-                                    <img src="{{asset('images/author-3.jpg')}}" alt="Author">
-                                </div>
-                                <div class="testimonial-content">
-                                    <p class="pb-5 mb-6 border-b border-gray-300">Stop wasting time and money designing and managing a website that doesn’t get results. Happiness guaranteed! Stop wasting time and money designing and managing a website that doesn’t get results. Happiness guaranteed!</p>
-                                    <h6 class="text-lg font-semibold text-gray-900">Isabela Moreira</h6>
-                                    <span class="text-sm text-gray-700">CEO, GrayGrids</span>
-                                </div>
-                            </div> <!-- single testimonial -->
-                        </div>
-                        <div class="w-full lg:w-1/3">
-                            <div class="text-center single-testimonial">
-                                <div class="testimonial-image">
-                                    <img src="{{asset('images/author-1.jpg')}}" alt="Author">
-                                </div>
-                                <div class="testimonial-content">
-                                    <p class="pb-5 mb-6 border-b border-gray-300">Stop wasting time and money designing and managing a website that doesn’t get results. Happiness guaranteed! Stop wasting time and money designing and managing a website that doesn’t get results. Happiness guaranteed!</p>
-                                    <h6 class="text-lg font-semibold text-gray-900">Fiona</h6>
-                                    <span class="text-sm text-gray-700">Lead Designer, UIdeck</span>
-                                </div>
-                            </div> <!-- single testimonial -->
-                        </div>
-                        <div class="w-full lg:w-1/3">
-                            <div class="text-center single-testimonial">
-                                <div class="testimonial-image">
-                                    <img src="{{asset('images/author-2.jpg')}}" alt="Author">
-                                </div>
-                                <div class="testimonial-content">
-                                    <p class="pb-5 mb-6 border-b border-gray-300">Stop wasting time and money designing and managing a website that doesn’t get results. Happiness guaranteed! Stop wasting time and money designing and managing a website that doesn’t get results. Happiness guaranteed!</p>
-                                    <h6 class="text-lg font-semibold text-gray-900">Elon Musk</h6>
-                                    <span class="text-sm text-gray-700">CEO, SpaceX</span>
-                                </div>
-                            </div> <!-- single testimonial -->
-                        </div>
-                        <div class="w-full lg:w-1/3">
-                            <div class="text-center single-testimonial">
-                                <div class="testimonial-image">
-                                    <img src="{{asset('images/author-4.jpg')}}" alt="Author">
-                                </div>
-                                <div class="testimonial-content">
-                                    <p class="pb-5 mb-6 border-b border-gray-300">Stop wasting time and money designing and managing a website that doesn’t get results. Happiness guaranteed! Stop wasting time and money designing and managing a website that doesn’t get results. Happiness guaranteed!</p>
-                                    <h6 class="text-lg font-semibold text-gray-900">Fajar Siddiq</h6>
-                                    <span class="text-sm text-gray-700">CEO, MakerFlix</span>
-                                </div>
-                            </div> <!-- single testimonial -->
-                        </div>
-                    </div> <!-- row -->
-                </div>
-            </div> <!-- row -->
-        </div> <!-- container -->
-    </section>
-
-    <!--====== TESTIMONIAL THREE PART ENDS ======-->
-
-    <!--====== CLIENT LOGO PART START ======-->
-
-    <section class="py-16 bg-gray-100 client-logo-area">
-        <div class="container">
-            <div class="items-center row">
-                <div class="w-1/2 md:w-1/4">
-                    <div class="flex justify-center single-client">
-                        <img src="assets/images/client_logo_01.png" alt="Logo">
-                    </div> <!-- single client -->
-                </div>
-                <div class="w-1/2 md:w-1/4">
-                    <div class="flex justify-center single-client">
-                        <img src="assets/images/client_logo_02.png" alt="Logo">
-                    </div> <!-- single client -->
-                </div>
-                <div class="w-1/2 md:w-1/4">
-                    <div class="flex justify-center single-client">
-                        <img src="assets/images/client_logo_03.png" alt="Logo">
-                    </div> <!-- single client -->
-                </div>
-                <div class="w-1/2 md:w-1/4">
-                    <div class="flex justify-center single-client">
-                        <img src="assets/images/client_logo_04.png" alt="Logo">
-                    </div> <!-- single client -->
-                </div>
-            </div> <!-- row -->
-        </div> <!-- container -->
-    </section>
-
-    <!--====== CLIENT LOGO PART ENDS ======-->
-
-    <!--====== CONTACT PART START ======-->
-
-    <section id="contact" class="contact-area py-120">
-        <div class="container">
-            <div class="justify-center row">
-                <div class="w-full mx-4 lg:w-1/2">
-                    <div class="pb-10 text-center section-title">
-                        <h4 class="title">Get In touch</h4>
-                        <p class="text">Stop wasting time and money designing and managing a website that doesn’t get results. Happiness guaranteed!</p>
-                    </div> <!-- section title -->
-                </div>
-            </div> <!-- row -->
-            <div class="justify-center row">
-                <div class="w-full lg:w-2/3">
-                    <div class="contact-form">
-                        <form id="contact-form" action="assets/contact.php" method="post" data-toggle="validator">
-                            <div class="row">
-                                <div class="w-full md:w-1/2">
-                                    <div class="mx-4 mb-6 single-form form-group">
-                                        <input type="text" name="name" placeholder="Your Name" data-error="Name is required." required="required">
-                                        <div class="help-block with-errors"></div>
-                                    </div> <!-- single form -->
-                                </div>
-                                <div class="w-full md:w-1/2">
-                                    <div class="mx-4 mb-6 single-form form-group">
-                                        <input type="email" name="email" placeholder="Your Email" data-error="Valid email is required." required="required">
-                                        <div class="help-block with-errors"></div>
-                                    </div> <!-- single form -->
-                                </div>
-                                <div class="w-full md:w-1/2">
-                                    <div class="mx-4 mb-6 single-form form-group">
-                                        <input type="text" name="subject" placeholder="Subject" data-error="Subject is required." required="required">
-                                        <div class="help-block with-errors"></div>
-                                    </div> <!-- single form -->
-                                </div>
-                                <div class="w-full md:w-1/2">
-                                    <div class="mx-4 mb-6 single-form form-group">
-                                        <input type="text" name="phone" placeholder="Phone" data-error="Phone is required." required="required">
-                                        <div class="help-block with-errors"></div>
-                                    </div> <!-- single form -->
-                                </div>
-                                <div class="w-full">
-                                    <div class="mx-4 mb-6 single-form form-group">
-                                        <textarea rows="5" placeholder="Your Mesaage" name="message" data-error="Please, leave us a message." required="required"></textarea>
-                                        <div class="help-block with-errors"></div>
-                                    </div> <!-- single form -->
-                                </div>
-                                <p class="mx-4 form-message"></p>
-                                <div class="w-full">
-                                    <div class="mx-4 mt-2 text-center single-form form-group">
-                                        <button type="submit" class="main-btn gradient-btn focus:outline-none">send message</button>
-                                    </div> <!-- single form -->
-                                </div>
-                            </div> <!-- row -->
-                        </form>
-                    </div> <!-- row -->
-                </div>
-            </div> <!-- row -->
-        </div> <!-- container -->
-    </section>
-
-    <!--====== CONTACT PART ENDS ======-->
-
     <!--====== FOOTER PART START ======-->
 
-    <footer id="footer" class="bg-gray-100 footer-area">
+    <footer id="footer" class="bg-gray-100 footer-area pt-32">
         <div class="mb-16 footer-widget">
-            <div class="container">
-                <div class="row">
-                    <div class="w-full">
-                        <div class="items-end justify-between block mb-8 footer-logo-support md:flex">
-                            <div class="flex items-end footer-logo">
-                                <a class="mt-8" href="index.html"><img src="{{asset('images/logo.svg')}}" alt="Logo"></a>
-
-                                <ul class="flex mt-8 ml-8 footer-social">
-                                    <li><a href="javascript:void(0)"><i class="lni-facebook-filled"></i></a></li>
-                                    <li><a href="javascript:void(0)"><i class="lni-twitter-original"></i></a></li>
-                                    <li><a href="javascript:void(0)"><i class="lni-instagram-original"></i></a></li>
-                                    <li><a href="javascript:void(0)"><i class="lni-linkedin-original"></i></a></li>
-                                </ul>
-                            </div> <!-- footer logo -->
-
-                        </div> <!-- footer logo support -->
-                    </div>
-                </div> <!-- row -->
+            <div class="container"> <!-- row -->
                 <div class="row">
                     <div class="w-full sm:w-1/2 md:w-1/4 lg:w-1/6">
                         <div class="mb-8 footer-link">
@@ -523,21 +363,20 @@
                                     </button>
                                 </form>
                             </div>
-                            <p class="font-medium text-gray-900">Subscribe weekly newsletter to stay upto date. We don’t send spam.</p>
+                            <p class="font-medium text-gray-900">Subscribe weekly newsletter to stay up to date. We don’t send spam.</p>
                         </div> <!-- footer newsletter -->
                     </div>
                 </div> <!-- row -->
             </div> <!-- container -->
         </div> <!-- footer widget -->
 
-        <div class="bg-blue-900 footer-copyright">
+        <div class="bg-purple-900 footer-copyright">
             <div class="container">
                 <div class="row">
                     <div class="w-full">
                         <div class="py-6 text-center">
                             <p class="text-white">
-                                Template Crafted by
-                                <a class="text-blue-500 duration-300 hover:text-blue-700" rel="nofollow" href="https://tailwindtemplates.co">TailwindTemplates</a>
+                                Evento <span class="italic text-gray-300">All rights reserved &#169;</span>
                             </p>
                         </div>
                     </div>
@@ -550,7 +389,7 @@
 
     <!--====== BACK TO TOP PART START ======-->
 
-    <a class="back-to-top" href="#"><i class="lni-chevron-up"></i></a>
+    <a class="back-to-top" href="#"><i class="fa-solid fa-angle-up"></i></a>
 
     <!--====== BACK TO TOP PART ENDS ======-->
 
@@ -577,6 +416,8 @@
 
     <!--====== Main js ======-->
     <script src="{{asset('js/main.js')}}"></script>
+
+
 
 </body>
 

@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('reservations', function (Blueprint $table) {
             $table->id();
-            $table->integer('placeNumber');
             $table->boolean('isAcceptedByOrganizer');
             $table->unsignedBigInteger('clientID');
             $table->foreign('clientID')->references('id')->on('users')->onDelete('cascade');

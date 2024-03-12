@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\EventRequest;
+use App\Http\Requests\SearchRequest;
 use App\Models\Category;
 use App\Models\Event;
+use App\Models\Reservation;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class EventController extends Controller
 {
@@ -26,17 +29,21 @@ class EventController extends Controller
 
     public function filter(Request $request)
     {
-        $events = Event::where('categoryID', $request->categoryID)->paginate(6);
-        $categories = Category::all();
-        return view('client.explore', compact('events', 'categories'));
+        if ($request->categoryID == 'all') {
+            return $this->explore();
+        } else {
+            $events = Event::where('categoryID', $request->categoryID)->paginate(6);
+            $categories = Category::all();
+            return view('client.explore', compact('events', 'categories'));
+        }
     }
 
-    public function search(Request $request)
+    public function search(SearchRequest $request)
     {
 
         $categories = Category::all();
         $query = Event::where('adminValidation', 'accepted');
-        if ($search = request('search')) {
+        if ($search = $request->search) {
             $query->where('title', 'like', '%' . $search . '%');
         }
         $events = $query->paginate(6);
@@ -83,7 +90,14 @@ class EventController extends Controller
      */
     public function show(Event $event)
     {
-        return view('eventPage', compact('event'));
+        if(Auth::user()->role == 'client'){
+            $clientID = Auth::user()->clients->id;
+            $reserved = Reservation::where('eventID', $event->id)->where('clientID', $clientID)->first();
+            return view('eventPage', compact('event', 'reserved'));
+        }else{
+            $reserved = false;
+            return view('eventPage', compact('event', 'reserved'));    
+        }        
     }
 
     /**
