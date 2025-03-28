@@ -31,7 +31,6 @@ class ReservationController extends Controller
     public function store(ReservationRequest $request)
     {
         Reservation::create([
-            'placeNumber' => $request->placeNumber,
             'isAcceptedByOrganizer' => $request->validation,
             'clientID' => $request->client,
             'eventID' => $request->event,
